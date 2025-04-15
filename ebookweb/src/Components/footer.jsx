@@ -1,30 +1,107 @@
-import { useState } from 'react';
-import { ChevronDown, Search } from 'lucide-react';
-export default function Footer(){
-    const [isOpen, setIsOpen] = useState(false);
+import { FaFacebookF, FaYoutube, FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { MdLocationOn, MdPhone, MdEmail } from "react-icons/md";
 
-    const toggleDropdown = () => {
-      setIsOpen(prev => !prev);
-    };
-    return (
-        <div className="relative inline-block text-left">
-          <button
-            onClick={toggleDropdown}
-            className="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50"
-          >
-            Category
-            <ChevronDown className="ml-2 h-4 w-4 text-gray-500" />
-          </button>
-
-          {isOpen && (
-            <div className="absolute z-10 mt-2 w-40 bg-white border rounded-md shadow-lg">
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Fiction</a>
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Science</a>
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Business</a>
-              <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Technology</a>
+export default function Footer() {
+  return (
+    <footer className="bg-white border-t border-gray-200 text-sm text-gray-600">
+      <div className="max-w-7xl mx-auto py-10 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+        {/* Logo + Intro */}
+        <div className="col-span-1 lg:col-span-1">
+          <div className="flex items-center gap-2 mb-2">
+            <img src="/ebook-icon.svg" alt="Logo" className="h-8 w-8" />
+            <div>
+              <div className="text-2xl font-bold text-indigo-900">
+                Book<span className="text-orange-400">land</span>
+              </div>
+              <div className="text-base ">Book Store Website</div>
             </div>
-          )}
+          </div>
+          <p className="text-xl mb-4 text-gray-500">
+            Bookland is a Book Store Ecommerce Website Template by DexignZone lorem ipsum dolor sit
+          </p>
+          <div className="flex gap-4">
+            {[FaFacebookF, FaYoutube, FaLinkedinIn, FaInstagram].map((Icon, idx) => (
+              <div
+                key={idx}
+                className="w-10 h-10 bg-orange-100 text-orange-400 rounded-full flex items-center justify-center hover:bg-orange-200 transition"
+              >
+                <Icon className="text-xl" />
+              </div>
+            ))}
+          </div>
         </div>
-    )
 
+        <div>
+          <h4 className="text-indigo-900 font-semibold text-xl mb-3">Our Links</h4>
+          <ul className="space-y-3 text-gray-500 text-lg">
+            <li><span className="text-orange-400">&rsaquo;</span> About Us</li>
+            <li><span className="text-orange-400">&rsaquo;</span> Contact Us</li>
+            <li><span className="text-orange-400">&rsaquo;</span> Privacy Policy</li>
+            <li><span className="text-orange-400">&rsaquo;</span> Pricing Table</li>
+            <li><span className="text-orange-400">&rsaquo;</span> FAQ</li>
+          </ul>
+        </div>
+
+        
+        <div>
+          <h4 className="text-indigo-900 font-semibold text-xl mb-3">Bookland ?</h4>
+          <ul className="space-y-3 text-gray-500 text-lg">
+            <li><span className="text-orange-400">&rsaquo;</span> Bookland</li>
+            <li><span className="text-orange-400">&rsaquo;</span> Services</li>
+            <li><span className="text-orange-400">&rsaquo;</span> Book Details</li>
+            <li><span className="text-orange-400">&rsaquo;</span> Blog Details</li>
+            <li><span className="text-orange-400">&rsaquo;</span> Shop</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-indigo-900 font-semibold text-xl mb-3">Resources</h4>
+          <ul className="space-y-3 text-gray-500 text-lg">
+            <li><span className="text-orange-400">&rsaquo;</span> Download</li>
+            <li><span className="text-orange-400">&rsaquo;</span> Help Center</li>
+            <li><span className="text-orange-400">&rsaquo;</span> Shop Cart</li>
+            <li><span className="text-orange-400">&rsaquo;</span> Login</li>
+            <li><span className="text-orange-400">&rsaquo;</span> Partner</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 className="text-indigo-900 font-semibold text-xl mb-3">Get in Touch With Us</h4>
+          <ul className="space-y-4 text-gray-500 text-lg">
+            <li className="flex items-start gap-3">
+              <MdLocationOn className="text-orange-400 mt-1" />
+              832 Thompson Drive, San Fransisco CA 94107, US
+            </li>
+            <li className="flex items-center gap-3">
+              <MdPhone className="text-orange-400" />
+              +123 345123 556
+            </li>
+            <li className="flex items-center gap-3">
+              <MdPhone className="text-orange-400" />
+              +123 345123 556
+            </li>
+            <li className="flex items-center gap-3">
+              <MdEmail className="text-orange-400" />
+              support@bookland.id
+            </li>
+            <li className="flex items-center gap-3">
+              <MdEmail className="text-orange-400" />
+              info@bookland.id
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Credit */}
+      <div className="border-t border-gray-200 py-5 px-4">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-lg sm:text-xl text-gray-500">
+          <span>Bookland Book Store Ecommerce Website - © 2025 All Rights Reserved</span>
+          <span className="mt-2 sm:mt-0">
+            Made by 
+            <span className="text-orange-500 font-semibold text-xl"> HU_team</span>
+          </span>
+        </div>
+      </div>
+    </footer>
+  );
 }
