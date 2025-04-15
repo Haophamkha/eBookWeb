@@ -1,5 +1,5 @@
-
-
+import 'preline/preline.js';
+import HomePage from './Pages/Home'
 import './App.css'
 
 function App() {
@@ -7,9 +7,8 @@ function App() {
 
   return (
     <>
-      <div>
-
-      </div>
+      <HomePage />
+      
     </>
   )
 }
