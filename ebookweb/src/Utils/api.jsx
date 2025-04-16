@@ -1,11 +1,19 @@
-// import axios from 'axios';
+import axios from 'axios';
+// Cấu hình axios instance
+const api = axios.create({
+    baseURL: "https://ebookstore.free.beeceptor.com", 
+    timeout: 5000,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  
 
-const Account_URL = 'https://67fe36003da09811b17817be.mockapi.io/api/v1/Account';
-
-// export const getCustomers = () => axios.get(BASE_URL);
-
-// export const addCustomer = (user) => axios.post(BASE_URL, user);
-
-// export const updateCustomer = (id, user) => axios.put(`${BASE_URL}/${id}`, user);
-
-// export const deleteCustomer = (id) => axios.delete(`${BASE_URL}/${id}`);
+  export const getNews = () => api.get("/news");
+  export const getReviews = () => api.get("/review");
+  export const getAccount = () => api.get("/account");
+  
+  // Có thể tạo thêm post/put/delete nếu cần
+  // export const postSomething = (data) => api.post("/something", data);
+  
+  export default api;

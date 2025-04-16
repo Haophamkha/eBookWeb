@@ -1,22 +1,22 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown, Search } from 'lucide-react';
-import { MdOutlineShoppingCart } from "react-icons/md";
-import { FaRegHeart } from "react-icons/fa";
+import { MdOutlineShoppingCart } from 'react-icons/md';
+import { FaRegHeart } from 'react-icons/fa';
+import { getAccount } from '../Utils/api';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("Category");
-
-  const [userName, setUserName] = useState("Brian");
-  const [gmail, setGmail] = useState("info@gmail.com");
-  const [img, setImg] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState('Category');
+  const [userName, setUserName] = useState('Brian');
+  const [gmail, setGmail] = useState('info@gmail.com');
+  const [img, setImg] = useState('');
 
   useEffect(() => {
-    const url = "https://67fe36003da09811b17817be.mockapi.io/api/v1/Account";
-
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
+    getAccount()
+      .then((res) => {
+        console.log('Account data:', res);
+        
+        const data = res.data;
         if (Array.isArray(data) && data.length > 0) {
           const randomItem = data[Math.floor(Math.random() * data.length)];
           setUserName(randomItem.userName);
@@ -24,12 +24,13 @@ export default function Header() {
           setImg(randomItem.img);
         }
       })
-      .catch((error) => console.error("Error fetching data:", error));
+      .catch((error) => {
+        console.error('Error fetching account data:', error);
+      });
   }, []);
+  const toggleDropdown = () => setIsOpen((prev) => !prev);
 
-  const toggleDropdown = () => setIsOpen(prev => !prev);
-
-  const categories = ["Fiction", "Science", "Business", "Technology", "Romance", "History"];
+  const categories = ['Fiction', 'Science', 'Business', 'Technology', 'Romance', 'History'];
 
   return (
     <div className="w-full bg-white">
@@ -47,7 +48,6 @@ export default function Header() {
 
         {/* Search box */}
         <div className="relative flex items-center bg-gray-100 rounded-md w-full max-w-md h-10">
-          {/* Dropdown Category */}
           <div className="relative h-full flex items-center">
             <button
               onClick={toggleDropdown}
@@ -69,8 +69,8 @@ export default function Header() {
                     }}
                     className={`block px-3 py-1.5 text-sm hover:bg-gray-100 ${
                       category === selectedCategory
-                        ? "bg-amber-400 text-white font-semibold"
-                        : "text-gray-700"
+                        ? 'bg-amber-400 text-white font-semibold'
+                        : 'text-gray-700'
                     }`}
                   >
                     {category}
@@ -80,10 +80,8 @@ export default function Header() {
             )}
           </div>
 
-          {/* Vertical Divider */}
           <div className="h-6 w-px bg-gray-300 mx-2" />
 
-          {/* Search input */}
           <div className="relative flex-grow">
             <input
               type="text"
@@ -96,7 +94,6 @@ export default function Header() {
 
         {/* Icons + Profile */}
         <div className="flex items-center gap-4">
-          {/* Wishlist */}
           <div className="relative">
             <FaRegHeart className="w-5 h-5 text-black" />
             <span className="absolute -top-2 -right-2 text-xs bg-orange-400 text-white rounded-full px-1">
@@ -104,7 +101,6 @@ export default function Header() {
             </span>
           </div>
 
-          {/* Cart */}
           <div className="relative">
             <MdOutlineShoppingCart className="w-5 h-5 text-black" />
             <span className="absolute -top-2 -right-2 text-xs bg-orange-400 text-white rounded-full px-1">
@@ -112,13 +108,8 @@ export default function Header() {
             </span>
           </div>
 
-          {/* User Info */}
           <div className="flex items-center gap-2 text-left">
-            <img
-              src={img}
-              alt="User Avatar"
-              className="w-8 h-8 rounded-md object-cover"
-            />
+            <img src={img} alt="User Avatar" className="w-8 h-8 rounded-md object-cover" />
             <div className="leading-tight">
               <div className="font-semibold text-indigo-900 text-sm">{userName}</div>
               <div className="text-xs text-gray-500">{gmail}</div>

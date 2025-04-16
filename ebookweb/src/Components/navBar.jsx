@@ -26,7 +26,6 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow-md px-6 py-4">
       <div className="max-w-7xl mx-auto flex items-center gap-6 pl-14">
-        {/* Navigation links */}
         <div className="flex space-x-4 text-sm font-semibold text-indigo-900 ml-16">
           {navItems.map((item, index) => (
             <div key={index} className="relative h-full flex items-center">
@@ -41,17 +40,17 @@ export default function Navbar() {
                   </button>
 
                   {openDropdownIndex === index && (
-                    <div className="absolute z-50 top-full mt-1 left-full ml-2 w-36 rounded-md shadow-none">
+                    <div className="absolute z-50 top-full mt-1 left-0 w-26 bg-white border border-gray-300 rounded-md shadow-lg">
                       {item.dropdown.map((option, optIdx) => (
                         <a
                           key={optIdx}
                           href="#"
                           onClick={() => selectItem(index, option)}
-                          className={`block px-3 py-1.5 text-sm transition ${
+                          className={`block px-3 py-1.5 text-sm transition duration-150 ${
                             selectedItems[index] === option
-                              ? "text-orange-400 font-semibold"
-                              : "text-indigo-900"
-                          } hover:text-orange-400`}
+                              ? "bg-amber-400 text-white font-semibold"
+                              : "text-indigo-900 hover:bg-gray-100"
+                          }`}
                         >
                           {option}
                         </a>
@@ -71,8 +70,8 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* CTA Button */}
-        <button className="ml-auto mr-50 bg-orange-400 hover:bg-orange-500 text-white font-semibold px-5 py-2 rounded-md shadow transition">
+        {/* Button */}
+        <button className="ml-64 bg-orange-400 hover:bg-orange-500 text-white font-semibold px-5 py-2 rounded-md shadow transition">
           Get In Touch
         </button>
       </div>
