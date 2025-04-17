@@ -55,7 +55,7 @@ export default function Footer() {
             Our Links
           </h4>
           <ul className="space-y-3 text-gray-500 text-lg">
-            {["About Us", "Contact Us", "Privacy Policy", "Pricing Table", "FAQ"].map((item, idx) => (
+            {["About Us", "Contact Us"].map((item, idx) => (
               <li key={idx}>
                 <span className="text-orange-400">&rsaquo;</span> {item}
               </li>
@@ -65,10 +65,10 @@ export default function Footer() {
 
         <div>
           <h4 className="text-indigo-900 font-semibold text-xl mb-3">
-            Bookland ?
+            eBookStore ?
           </h4>
           <ul className="space-y-3 text-gray-500 text-lg">
-            {["eBookStore", "Services", "Book Details", "Blog Details", "Shop"].map((item, idx) => (
+            {["eBookStore", "Book Details", "Shop"].map((item, idx) => (
               <li key={idx}>
                 <span className="text-orange-400">&rsaquo;</span> {item}
               </li>
@@ -81,7 +81,7 @@ export default function Footer() {
             Resources
           </h4>
           <ul className="space-y-3 text-gray-500 text-lg">
-            {["Download", "Help Center", "Shop Cart", "Login", "Partner"].map((item, idx) => (
+            {["Shop Cart", "Login", "Partner"].map((item, idx) => (
               <li key={idx}>
                 <span className="text-orange-400">&rsaquo;</span> {item}
               </li>

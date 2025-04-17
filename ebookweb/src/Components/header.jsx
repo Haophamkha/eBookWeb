@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { ChevronDown, Search } from 'lucide-react';
 import { MdOutlineShoppingCart } from 'react-icons/md';
-import { FaRegHeart } from 'react-icons/fa';
-import { getAccount } from '../Utils/api';
 
+import { getAccount } from '../Utils/api';
+import { IoBookOutline } from "react-icons/io5";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('Category');
@@ -95,7 +95,7 @@ export default function Header() {
         {/* Icons + Profile */}
         <div className="flex items-center gap-4">
           <div className="relative">
-            <FaRegHeart className="w-5 h-5 text-black" />
+            <IoBookOutline className="w-5 h-5 text-black" />
             <span className="absolute -top-2 -right-2 text-xs bg-orange-400 text-white rounded-full px-1">
               21
             </span>
@@ -116,6 +116,7 @@ export default function Header() {
             </div>
           </div>
         </div>
+        
       </header>
     </div>
   );
