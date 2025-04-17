@@ -1,93 +1,66 @@
 import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
-import { NavLink } from "react-router-dom"; // Đảm bảo sử dụng NavLink để giữ cho active class
+import { NavLink } from "react-router-dom";
 
 const navItems = [
-  {
-    title: "Home",
-    dropdown: [
-      { label: "Home 1", path: "/" },
-      { label: "Home 2", path: "/home-2" },
-    ],
-  },
+  { title: "Home", path: "/" },
   {
     title: "Pages",
     dropdown: [
-      { label: "About", path: "/about" },
-      { label: "Services", path: "/services" },
+      { label: "About Us", path: "/aboutus" },
+      { label: "My profile", path: "/myprofile" },
+      { label: "Error 404", path: "/error" },
     ],
   },
   {
     title: "Shop",
     dropdown: [
-      { label: "Products", path: "/products" },
+      { label: "Shop", path: "/shop" },
+      { label: "Shop Detail", path: "/shopdetail" },
       { label: "Cart", path: "/cart" },
     ],
   },
-  {
-    title: "Blog",
-    dropdown: [
-      { label: "Latest Posts", path: "/blog" },
-      { label: "Categories", path: "/categories" },
-    ],
-  },
-  {
-    title: "Post Layout",
-    dropdown: [
-      { label: "Layout 1", path: "/layout-1" },
-      { label: "Layout 2", path: "/layout-2" },
-    ],
-  },
-  {
-    title: "Contact Us",
-    path: "/contact",
-  },
+  { title: "Contact Us", path: "/contact" },
 ];
 
 export default function Navbar() {
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
-  const [selectedItems, setSelectedItems] = useState({});
 
   const toggleDropdown = (index) => {
     setOpenDropdownIndex(openDropdownIndex === index ? null : index);
   };
 
-  const selectItem = (parentIndex, item) => {
-    setSelectedItems((prev) => ({
-      ...prev,
-      [parentIndex]: item.label, // Lưu lại mục con đã chọn vào đối tượng selectedItems
-    }));
-  };
-
   return (
     <nav className="bg-white shadow-md px-6 py-4">
-      <div className="max-w-7xl mx-auto flex items-center gap-6 pl-14">
-        <div className="flex space-x-4 text-sm font-semibold text-indigo-900 ml-16">
+      <div className="max-w-7xl mx-auto flex items-center gap-6">
+        {/* Nav items */}
+        <div className="flex space-x-6 text-sm font-semibold text-indigo-900 ml-16">
           {navItems.map((item, index) => (
             <div key={index} className="relative h-full flex items-center">
               {item.dropdown ? (
                 <>
                   <button
                     onClick={() => toggleDropdown(index)}
-                    className="flex items-center h-full px-3 py-2 text-sm font-medium rounded-md outline-none hover:text-orange-400 transition"
+                    className="flex items-center px-3 py-2 text-sm font-medium rounded-md outline-none hover:text-orange-400 transition"
                   >
-                    {/* Hiển thị title gốc của item hoặc tên mục con nếu có */}
-                    {selectedItems[index] || item.title}
-                    <FaChevronDown className="ml-2 h-3 w-3 text-gray-500" />
+                    {item.title}
+                    <FaChevronDown className="ml-1 h-3 w-3 text-gray-500" />
                   </button>
 
                   {openDropdownIndex === index && (
-                    <div className="absolute z-50 top-full mt-1 left-0 w-26 bg-white border border-gray-300 rounded-md shadow-lg">
+                    <div className="absolute z-50 top-full mt-2 left-0 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
                       {item.dropdown.map((option, optIdx) => (
                         <NavLink
                           key={optIdx}
                           to={option.path}
-                          onClick={() => selectItem(index, option)} // Cập nhật mục đã chọn
-                          className={`block px-3 py-1.5 text-sm transition duration-150 ${
-                            selectedItems[index] === option.label
-                              ? "bg-amber-400 text-white font-semibold"
-                              : "text-indigo-900 hover:bg-gray-100"
-                          }`}
+                          onClick={() => setOpenDropdownIndex(null)}
+                          className={({ isActive }) =>
+                            `block px-4 py-2 text-sm transition ${
+                              isActive
+                                ? "bg-orange-400 text-white font-semibold"
+                                : "text-indigo-900 hover:bg-gray-100"
+                            }`
+                          }
                         >
                           {option.label}
                         </NavLink>
@@ -98,7 +71,11 @@ export default function Navbar() {
               ) : (
                 <NavLink
                   to={item.path}
-                  className="px-3 py-2 hover:text-orange-400 transition"
+                  className={({ isActive }) =>
+                    `px-3 py-2 transition ${
+                      isActive ? "text-orange-500 font-semibold" : "hover:text-orange-400"
+                    }`
+                  }
                 >
                   {item.title}
                 </NavLink>
@@ -107,10 +84,27 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Button */}
-        <button className="ml-64 bg-orange-400 hover:bg-orange-500 text-white font-semibold px-5 py-2 rounded-md shadow transition">
+        {/* Spacer để đẩy nút sang phải */}
+        <div className="flex-1"></div>
+
+        {/* Button điều hướng */}
+        <button className="bg-orange-400 hover:bg-orange-500 text-white font-semibold px-5 py-2 rounded-md shadow transition">
           Get In Touch
         </button>
+
+        {/* NavLink Đăng nhập / Đăng ký */}
+        <NavLink
+          to="/login"
+          className="ml-4 bg-white border border-orange-400 text-orange-500 hover:bg-orange-50 font-semibold px-4 py-2 rounded-md shadow-sm transition"
+        >
+          Đăng nhập
+        </NavLink>
+        <NavLink
+          to="/register"
+          className="ml-2 bg-orange-400 hover:bg-orange-500 text-white font-semibold px-4 py-2 rounded-md shadow transition"
+        >
+          Đăng ký
+        </NavLink>
       </div>
     </nav>
   );
