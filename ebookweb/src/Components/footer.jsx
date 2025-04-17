@@ -4,10 +4,10 @@ import {
   FaLinkedinIn,
   FaInstagram,
 } from "react-icons/fa";
-import { MdLocationOn, MdPhone, MdEmail } from "react-icons/md";
+import { MdLocationOn, MdPhone } from "react-icons/md";
+import { MdOutlineEmail } from "react-icons/md";
 import { motion } from "framer-motion";
 
-// ✅ Fix ESLint: tránh dùng trực tiếp motion.footer
 const MotionFooter = motion.footer;
 
 export default function Footer() {
@@ -95,20 +95,25 @@ export default function Footer() {
             Get in Touch With Us
           </h4>
           <ul className="space-y-4 text-gray-500 text-lg">
-            <li className="flex items-start gap-3">
-              <MdLocationOn className="text-orange-400 text-2xl mt-1" />
+            <li className="flex items-center gap-3">
+              <MdLocationOn className="text-orange-400 text-6xl" />
               <span>12 Nguyễn Văn Bảo, Phường 1, Gò Vấp, Hồ Chí Minh</span>
             </li>
+
             <li className="flex items-center gap-3">
               <MdPhone className="text-orange-400 text-2xl" />
-              <span>+012 345 6789 &nbsp;&nbsp;|&nbsp;&nbsp; +012 345 6789</span>
+              <div className="leading-tight">
+                <span className="block">+012 345 6789</span>
+                <span className="block">+012 345 6789</span>
+              </div>
             </li>
-            <li className="flex items-center gap-3">
-              <MdEmail className="text-orange-400 text-2xl" />
-              <span>
-                haop@eBookStore@gmail.com <br />
-                uyen@eBookStore@gmail.com
-              </span>
+
+            <li className="flex items-start gap-3">
+              <MdOutlineEmail className="text-orange-400 text-2xl mt-4" />
+              <div>
+                <span className="block">haopEbook@gmail.com</span>
+                <span className="block">uyenEbook@gmail.com</span>
+              </div>
             </li>
           </ul>
         </div>
@@ -117,7 +122,9 @@ export default function Footer() {
       {/* Credit */}
       <div className="border-t border-gray-200 py-5 px-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-lg sm:text-xl text-gray-500">
-          <span>eBook Store Ecommerce Website - © 2025 All Rights Reserved</span>
+          <span>
+            eBook Store Ecommerce Website - © 2025 All Rights Reserved
+          </span>
           <span className="mt-2 sm:mt-0">
             Made by{" "}
             <span className="text-orange-500 font-semibold text-xl">
