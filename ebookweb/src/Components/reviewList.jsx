@@ -9,7 +9,7 @@ import "slick-carousel/slick/slick-theme.css";
 export default function ReviewList() {
   const [reviews, setReviews] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
-
+  
   useEffect(() => {
     getReviews()
       .then((res) => {

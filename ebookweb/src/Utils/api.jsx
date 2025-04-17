@@ -1,7 +1,8 @@
 import axios from 'axios';
 // Cấu hình axios instance
 const api = axios.create({
-    baseURL: "https://ebookstore.free.beeceptor.com", 
+    // baseURL: "https://ebookstore.free.beeceptor.com", 
+    baseURL: "http://localhost:3001",
     timeout: 5000,
     headers: {
       "Content-Type": "application/json",
@@ -10,8 +11,8 @@ const api = axios.create({
   
 
   export const getNews = () => api.get("/news");
-  export const getReviews = () => api.get("/review");
-  export const getAccount = () => api.get("/account");
+  export const getReviews = () => api.get("/reviews");
+  export const getAccount = () => api.get("/accounts");
   
   // Có thể tạo thêm post/put/delete nếu cần
   // export const postSomething = (data) => api.post("/something", data);

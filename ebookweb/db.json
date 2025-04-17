@@ -1,0 +1,187 @@
+{
+  "accounts": [
+    {
+      "userName": "Freda Mertz",
+      "gmail": "Domenico.Schuster@example.org",
+      "password": "IVmp7IzSXoTPATm",
+      "img": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/9.jpg",
+      "id": "1"
+    },
+    {
+      "userName": "Timothy Nicolas",
+      "gmail": "Maverick_Orn0@example.org",
+      "password": "gCWKRE4aF6ZKnUz",
+      "img": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/55.jpg",
+      "id": "2"
+    },
+    {
+      "userName": "Jennifer Brown",
+      "gmail": "Kenton37@example.com",
+      "password": "ubmx5ycpO9xbpyQ",
+      "img": "https://avatars.githubusercontent.com/u/70451676",
+      "id": "3"
+    },
+    {
+      "userName": "Darryl McGlynn-Cummings",
+      "gmail": "Marisol_Kessler@example.org",
+      "password": "geYRHclplw1rB8z",
+      "img": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/48.jpg",
+      "id": "4"
+    },
+    {
+      "userName": "Forrest Konopelski",
+      "gmail": "Ron.Altenwerth@example.net",
+      "password": "FlQvMpCXdk8Pess",
+      "img": "https://avatars.githubusercontent.com/u/20821944",
+      "id": "5"
+    },
+    {
+      "userName": "Marion Von",
+      "gmail": "Leopold_Pollich54@example.com",
+      "password": "qAe8oyd2JTk7n5F",
+      "img": "https://avatars.githubusercontent.com/u/96243724",
+      "id": "6"
+    },
+    {
+      "userName": "Gregg Senger V",
+      "gmail": "Domenico94@example.org",
+      "password": "H07sSDqdM89EwGJ",
+      "img": "https://avatars.githubusercontent.com/u/89047045",
+      "id": "7"
+    },
+    {
+      "userName": "Hope Oberbrunner",
+      "gmail": "Gracie.Torphy@example.com",
+      "password": "41P8zWr2dfKz1KY",
+      "img": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/76.jpg",
+      "id": "8"
+    },
+    {
+      "userName": "Mathew Klein",
+      "gmail": "Schuyler.Schmeler89@example.org",
+      "password": "hAqEXi1m4mGdnVp",
+      "img": "https://avatars.githubusercontent.com/u/9675563",
+      "id": "9"
+    },
+    {
+      "userName": "Angel Huels",
+      "gmail": "Michelle58@example.net",
+      "password": "G7TrwIDC0pxWzwZ",
+      "img": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/female/512/85.jpg",
+      "id": "10"
+    }
+  ],
+  "news": [
+  {
+    "title": "Lợi ích của việc đọc sách: Tăng cường kiến thức và hạnh phúc",
+    "description": "Khám phá cách đọc sách có thể cải thiện khả năng nhận thức, giảm căng thẳng và nâng cao sức khỏe cảm xúc của bạn.",
+    "image": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889702/docsach_e6iidh.webp",
+    "date": "24 March, 2024"
+  },
+  {
+    "title": "10 mẹo cần biết để cải thiện kỹ năng đọc sách của bạn",
+    "description": "Khám phá các mẹo từ các chuyên gia giúp bạn nâng cao hiệu quả đọc sách, cải thiện khả năng hiểu và tận dụng tối đa mỗi cuốn sách.",
+    "image": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889939/kinangdocsach_cqlt3f.png",
+    "date": "18 July, 2024"
+  },
+  {
+    "title": "Tại sao việc đọc sách quan trọng đối với sức khỏe tâm lý?",
+    "description": "Tìm hiểu cách đọc sách có thể là công cụ mạnh mẽ giúp giảm căng thẳng, lo âu và cải thiện giấc ngủ của bạn.",
+    "image": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889937/docsachqt_o8ijft.jpg",
+    "date": "7 June, 2024"
+  },
+  {
+    "title": "Tại sao nên khuyến khích trẻ em đọc sách: Xây dựng nền tảng vững chắc",
+    "description": "Học cách việc phát triển thói quen đọc sách ở trẻ em là rất quan trọng trong việc thúc đẩy khả năng nhận thức, kỹ năng ngôn ngữ và thành công học thuật của chúng.",
+    "image": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889938/treemdocsach_nmdtsp.webp",
+    "date": "30 May, 2024"
+  }
+]
+,
+  "reviews": [
+    {
+      "comment": "Sách rất thú vị và dễ hiểu, mình học được nhiều điều.",
+      "name": "Al Schuster",
+      "avatar": "https://avatars.githubusercontent.com/u/22449668",
+      "stars": 2,
+      "id": "1"
+    },
+    {
+      "comment": "Truyện hấp dẫn, cốt truyện lôi cuốn từ đầu tới cuối.",
+      "name": "Roy Skiles",
+      "avatar": "https://avatars.githubusercontent.com/u/33444191",
+      "stars": 3,
+      "id": "2"
+    },
+    {
+      "comment": "Chất lượng in tốt, đóng gói cẩn thận. Sẽ ủng hộ lần sau.",
+      "name": "Chester Hickle",
+      "avatar": "https://avatars.githubusercontent.com/u/52511586",
+      "stars": 3,
+      "id": "3"
+    },
+    {
+      "comment": "Không như kỳ vọng, nội dung khá nhàm chán.",
+      "name": "Miranda Grant PhD",
+      "avatar": "https://avatars.githubusercontent.com/u/80302448",
+      "stars": 0,
+      "id": "4"
+    },
+    {
+      "comment": "Một cuốn sách truyền cảm hứng cực kỳ mạnh mẽ!",
+      "name": "Kate Schuster",
+      "avatar": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/68.jpg",
+      "stars": 3,
+      "id": "5"
+    },
+    {
+      "comment": "Thật sự không hài lòng, sách bị rách khi nhận hàng.",
+      "name": "Edna Rice DDS",
+      "avatar": "https://avatars.githubusercontent.com/u/79840315",
+      "stars": 0,
+      "id": "6"
+    },
+    {
+      "comment": "Giọng văn rất gần gũi, như đang nghe bạn kể chuyện.",
+      "name": "Holly Jenkins",
+      "avatar": "https://avatars.githubusercontent.com/u/88211853",
+      "stars": 4,
+      "id": "7"
+    },
+    {
+      "comment": "Cũng ổn, có vài phần hơi dài dòng nhưng vẫn đáng đọc.",
+      "name": "Stacey Hand",
+      "avatar": "https://avatars.githubusercontent.com/u/22122254",
+      "stars": 2,
+      "id": "8"
+    },
+    {
+      "comment": "Lối viết sáng tạo, nhân vật được xây dựng rất hay.",
+      "name": "Randal MacGyver Jr.",
+      "avatar": "https://avatars.githubusercontent.com/u/71169069",
+      "stars": 4,
+      "id": "9"
+    },
+    {
+      "comment": "Một trải nghiệm đọc tuyệt vời, không thể bỏ xuống!",
+      "name": "Randall Prosacco",
+      "avatar": "https://avatars.githubusercontent.com/u/9191063",
+      "stars": 4,
+      "id": "10"
+    },
+    {
+      "comment": "Cuốn sách hay nhất mình từng đọc trong năm nay!",
+      "name": "Tammy Jerde IV",
+      "avatar": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/26.jpg",
+      "stars": 5,
+      "id": "11"
+    },
+    {
+      "comment": "Nội dung súc tích, trình bày rõ ràng dễ hiểu.",
+      "name": "Ethel Rempel",
+      "avatar": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/61.jpg",
+      "stars": 3,
+      "id": "12"
+    }
+  ]
+}
