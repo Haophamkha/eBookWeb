@@ -84,27 +84,32 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Spacer để đẩy nút sang phải */}
-        <div className="flex-1"></div>
+        <div className="flex-1" />
 
-        {/* Button điều hướng */}
-        <button className="bg-orange-400 hover:bg-orange-500 text-white font-semibold px-5 py-2 rounded-md shadow transition">
-          Get In Touch
-        </button>
+        <div className="flex items-center">
+          <NavLink
+            to="/contact"
+            className="bg-orange-400 hover:bg-orange-500 text-white font-semibold px-5 py-2 rounded-md shadow transition mr-16"
+          >
+            Get In Touch
+          </NavLink>
 
-        {/* NavLink Đăng nhập / Đăng ký */}
-        <NavLink
-          to="/login"
-          className="ml-4 bg-white border border-orange-400 text-orange-500 hover:bg-orange-50 font-semibold px-4 py-2 rounded-md shadow-sm transition"
-        >
-          Đăng nhập
-        </NavLink>
-        <NavLink
-          to="/register"
-          className="ml-2 bg-orange-400 hover:bg-orange-500 text-white font-semibold px-4 py-2 rounded-md shadow transition"
-        >
-          Đăng ký
-        </NavLink>
+          {/* Đăng nhập & Đăng ký */}
+          <div className="flex items-center gap-2">
+            <NavLink
+              to="/login"
+              className="bg-white border border-orange-400 text-orange-500 hover:bg-orange-50 font-semibold px-4 py-2 rounded-md shadow-sm transition"
+            >
+              Đăng nhập
+            </NavLink>
+            <NavLink
+              to="/register"
+              className="bg-orange-400 hover:bg-orange-500 text-white font-semibold px-4 py-2 rounded-md shadow transition"
+            >
+              Đăng ký
+            </NavLink>
+          </div>
+        </div>
       </div>
     </nav>
   );

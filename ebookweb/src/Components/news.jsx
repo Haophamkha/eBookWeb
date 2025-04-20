@@ -15,9 +15,9 @@ export default function News() {
   }, []);
 
   return (
-    <section className="py-10 px-4 md:px-10">
+    <section className="py-24 px-4 md:px-10">
       <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-4xl font-bold text-indigo-900 mb-2">Latest News</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-indigo-900 mb-2">Thông tin mới nhất</h2>
         <p className="text-gray-500 max-w-2xl mx-auto">
           Những thông tin về sách sẽ được cập nhật thường xuyên tại đây. Hãy theo dõi để không bỏ lỡ những thông tin thú vị nhé!
         </p>
