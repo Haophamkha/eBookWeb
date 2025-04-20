@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-const shopDetail = () => {
-    return (
-        <>   
-        
-        </>       
-    )  
-}
-export default shopDetail;
-=======
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Star, ArrowLeft } from "lucide-react";
@@ -46,45 +35,6 @@ const ShopDetail = () => {
     };
 
     return (
-=======
-import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Star, ArrowLeft } from "lucide-react";
-
-const ShopDetail = () => {
-    const location = useLocation();
-    const navigate = useNavigate();
-    const book = location.state?.book;
-
-    if (!book) {
-        return (
-            <div className="w-[80%] mx-auto p-6">
-                <p>Không tìm thấy thông tin sản phẩm.</p>
-                <button onClick={() => navigate(-1)} className="mt-4 px-4 py-2 bg-orange-500 text-white rounded" >
-                Quay lại
-                </button>
-            </div>
-        );
-    }
-    const renderStars = (rating) => {
-        const totalStars = 5;
-        const filledStars = Math.floor(rating);
-        const hasHalfStar = rating % 1 >= 0.5; 
-        const stars = [];
-        for (let i = 0; i < totalStars; i++) {
-            if (i < filledStars) {
-                stars.push(<Star key={i} fill="currentColor" className="w-5 h-5 text-yellow-500" />); 
-            } else if (i === filledStars && hasHalfStar) {
-                stars.push(<Star key={i} fill="currentColor" className="w-5 h-5 text-yellow-500 opacity-50" />);
-            } else {
-                stars.push(<Star key={i} fill="none" className="w-5 h-5 text-gray-400" />); 
-            }
-            }
-        return stars;
-    };
-
-    return (
->>>>>>> 7c30d73 (add2004)
         <div className="w-[80%] mx-auto p-6">
             <div className="flex flex-col md:flex-row gap-8">
                 <div className="w-full md:w-1/3">
@@ -179,7 +129,4 @@ const ShopDetail = () => {
 };
 
 export default ShopDetail;
-<<<<<<< HEAD
->>>>>>> baouyen
-=======
->>>>>>> 7c30d73 (add2004)
+

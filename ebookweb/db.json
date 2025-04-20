@@ -183,7 +183,6 @@
       "id": "12"
     }
   ],
-<<<<<<< HEAD
   "books": [
     {
       "name": "SECONDS [Part I]",
@@ -245,8 +244,7 @@
       "author": "Hayao Miyazaki",
       "imgAuthor": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media.png"
     }
-  ]
-=======
+  ],
     "details": [
       {
         "id": 1,
@@ -399,5 +397,4 @@
         "description": "Mang một văn phong hài hòa giữa văn chương và triết lý, Émile hay là về giáo dục được các nhà phê bình trên thế giới đánh giá không chỉ là một chuyên luận về giáo dục, mà còn là một tác phẩm về “nghệ thuật hình thành con người”.\n\n Qua nhân vật hư cấu trong cuốn tiểu thuyết là cậu bé Émile, nhà văn muốn chỉ ra mục đích của sự giáo dục nhằm đào tạo một con người tự do, có khả năng tự bảo vệ chống mọi sự gò ép khiên cưỡng.\n\nCuộc đời của Émile được đề cập trong tác phẩm trọn vẹn từ khi cậu ra đời, bập bẹ tập nói đến giai đoạn Émile 20-25 tuổi (độ tuổi khôn lớn và lập gia đình). Khi còn bé, Émile được hướng vào việc học tập, vui chơi giải trí phù hợp với lứa tuổi, đến khi trở thành một chàng trai độc lập, anh được giáo dục về giới tính, thẩm mỹ, tri thức và tình cảm…"
       }      
     ]
->>>>>>> 7c30d73 (add2004)
 }
