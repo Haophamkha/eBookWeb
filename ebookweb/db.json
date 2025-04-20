@@ -183,6 +183,7 @@
       "id": "12"
     }
   ],
+<<<<<<< HEAD
   "books": [
     {
       "name": "SECONDS [Part I]",
@@ -245,4 +246,158 @@
       "imgAuthor": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media.png"
     }
   ]
+=======
+    "details": [
+      {
+        "id": 1,
+        "name": "Thư viện nửa đêm",
+        "author": "Matt Haig",
+        "avatar": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745090506/R_id0q05.jpg",
+        "star": "4.6",
+        "image": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745089611/1_d8pmfw.jpg",
+        "publisher": "NXB Văn học",
+        "year": "2020",
+        "price": 50000,
+        "tags": ["Tiểu thuyết", "Tâm lý", "Giả tưởng"],
+        "language": "Tiếng Việt",
+        "chapters": "30",
+        "description": "Mỗi cuốn sách chính là cơ hội giúp bạn thử một cuộc sống khác mà bạn có thể đã sống. Bạn sẽ xem được mọi thứ diễn ra như thế nào nếu bạn có những lựa chọn khác nhau, liệu rằng bạn có làm khác đi không, nếu bạn có cơ hội để thay đổi những điều khiến bạn hối tiếc trong quá khứ? Một cuốn tiểu thuyết tuyệt vời về những lựa chọn khiến cuộc sống trở nên tốt đẹp hơn của tác giả sách bán chạy nhất thế giới.\n\nỞ đâu đó ngoài rìa vũ trụ, có một thư viện chứa vô số những cuốn sách, mỗi cuốn là một câu chuyện của một thực tại khác. Trong đó có cuốn sách kể về chính câu chuyện của cuộc đời mà bạn đang sống, cùng tồn tại song song là những cuốn sách khác kể về cuộc đời khác mà bạn có thể đã sống nếu bạn đưa ra sự lựa chọn khác vào bất kỳ thời điểm nào trong cuộc đời. Chúng ta đôi khi một lần trong đời sẽ tự hỏi rằng cuộc sống sẽ như thế nào? Điều gì sẽ xảy ra nếu ta có cơ hội đến thư viện và tận mắt chứng kiến? Liệu rằng có một cuộc sống nào trong số này thực sự tốt hơn hiện tại hay không?\n\nTrong \"Thư viện Nửa Đêm\", cuốn tiểu thuyết mới đầy mê hoặc của Matt Haig, Nora Seed có cơ hội được thay đổi cuộc sống của cô bằng một cuộc sống mới, theo một nghề nghiệp mới, quay lại với các cuộc chia tay cũ, hiện thực hóa ước mơ trở thành một nhà băng học. Cô ấy phải tự tìm kiếm bản thân khi đến với Thư viện Nửa Đêm, để quyết định điều gì giúp cuộc đời trở nên đáng sống hơn ngay từ lúc bắt đầu."
+      },
+      {
+        "id": 2,
+        "name": "Hoàng Tử Bé",
+        "author": "Antoine de Saint-Exupéry",
+        "avatar": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745090505/nxbtre_oti56n.jpg",
+        "star": "4.8",
+        "image": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1744902340/hoang-tu-be-Antoine-De-Saint-Exupery_wce2qm.jpg",
+        "publisher": "NXB Trẻ",
+        "year": "2024",
+        "price": 45000,
+        "tags": ["Thiếu nhi", "Văn học", "Hư cấu"],
+        "language": "Tiếng Việt",
+        "chapters":"27",
+        "description": "“Hoàng Tử Bé” là một câu chuyện tưởng tượng đầy sâu sắc về một phi hành gia gặp một hoàng tử bé – hoàng tử từ hành tinh khác đến trong sa mạc. Hoàng tử bé kể lại cho phi hành gia về cuộc hành trình của mình, với những câu chuyện về việc trồng hạt giống, gặp gà mồi, và nhất là cuộc gặp gỡ đầy ý nghĩa với hoa hướng dương đáng yêu. Cuốn sách không chỉ đơn thuần là một câu chuyện thiếu nhi thông thường mà còn là một tác phẩm triết lý sâu sắc về tình bạn, tình yêu và sự trưởng thành.\n\nQua cuộc trò chuyện giữa hoàng tử bé và phi hành gia, chúng ta được tiếp cận với những bài học vô cùng ý nghĩa về cuộc sống. Hoàng tử bé dạy cho chúng ta rằng quan trọng không phải là sống lâu mà là sống ý nghĩa, rằng con người cần tìm hiểu và yêu thương nhau, và rằng tình bạn đích thực là điều quý giá nhất trong cuộc sống.\n\nCuốn sách cũng đặt ra những câu hỏi sâu sắc về suy tư, mục đích sống và tầm quan trọng của việc giữ gìn trái đất. Với ngôn ngữ đơn giản, hình ảnh tươi sáng và những bài học bất tử, “Hoàng Tử Bé” không chỉ là một câu chuyện cho trẻ em mà còn là một tác phẩm văn học kinh điển được nhiều người trên toàn thế giới yêu thích và trân trọng."
+      },
+      {
+        "id": 3,
+        "name": "Đắc Nhân Tâm",
+        "author": "Dale Carnegie",
+        "avatar": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745090506/LOGONXB_hfqgl1.jpg",
+        "star": "4.9",
+        "image": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1744902342/OIP_nqgu2i.jpg",
+        "publisher": "NXB Tổng hợp TP.HCM",
+        "year": "2018",
+        "price": 60000,
+        "tags": ["Kỹ năng sống", "Tâm lý học", "Phát triển bản thân"],
+        "language": "Tiếng Việt",
+        "chapters":"30",
+        "description": "Đắc nhân tâm – How to win friends and Influence People  của Dale Carnegie là quyển sách nổi tiếng nhất, bán chạy nhất và có tầm ảnh hưởng nhất của mọi thời đại. Tác phẩm đã được chuyển ngữ sang hầu hết các thứ tiếng trên thế giới và có mặt ở hàng trăm quốc gia. \n\nĐây là quyển sách duy nhất về thể loại self-help liên tục đứng đầu danh mục sách bán chạy nhất (best-selling Books) do báo The New York Times bình chọn suốt 10 năm liền. Riêng bản tiếng Anh của sách đã bán được hơn 15 triệu bản trên thế giới.\n\nTác phẩm có sức lan toả vô cùng rộng lớn – dù bạn đi đến bất cứ nơi đâu, bất kỳ quốc gia nào cũng đều có thể nhìn thấy. Tác phẩm được đánh giá là quyển sách đầu tiên và hay nhất, có ảnh hưởng làm thay đổi cuộc đời của hàng triệu người trên thế giới.\n\nQuyển sách này là cuốn sách “đầu tiên và hay nhất mọi thời đại về nghệ thuật giao tiếp và ứng xử”, quyển sách đã từng mang đến thành công và hạnh phúc cho hàng triệu người trên khắp thế giới."
+      },
+      {
+        "id": 4,
+        "name": "Trốn thoát mật thất vô hạn",
+        "author": "La Giản",
+        "avatar": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745090506/tt_npj5yj.jpg",
+        "star": "4.4",
+        "image": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1744902342/nhasachmienphi-tron-thoat-mat-that-vo-han_dwyjqe.jpg",
+        "publisher": "NXB Tri Thức",
+        "year": "2024",
+        "price": 30000,
+        "tags": ["Tiểu thuyết", "Kinh dị", "Hành động"],
+        "language": "Tiếng Việt",
+        "chapters":"50",
+        "description": "Mọi chuyện bắt đầu từ một ngày La Giản tỉnh lại từ trong giấc mơ, nhưng không phải là trong ngôi nhà của cậu mà là đang ở mình bị nhốt trong mật thất đóng kín.\n\nLa Giản nhìn xung quanh không có bất cứ gì chỉ có một tờ giấy được đính trên vách tường: “Trong vòng một giờ phải thoát khỏi mật thất, nếu không bạn sẽ bị loại trừ.”\n\nNếu bản thân bạn bị nhốt trong một không gian đóng kín. Muốn được tự do phải thoát khỏi nhà giam, giống như linh hồn thoát khỏi thân thể, như vậy cần rất nhiều cố gắng rất nhiều thời gian."
+      },
+      {
+        "id": 5,
+        "name": "Bánh Mì Thơm, Cà Phê Đắng",
+        "author": "Nguyễn Thị Việt Hà",
+        "avatar": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745090506/kd_u0r2jw.jpg",
+        "star": "4.2",
+        "image": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1744902341/nhasachmienphi-banh-mi-thom-ca-phe-dang_sxs2cc.jpg",
+        "publisher": "NXB Kim Đồng",
+        "year": "2020",
+        "price": 25000,
+        "tags": ["Tản văn", "Du ký", "Ẩm thực"],
+        "language": "Tiếng Việt",
+        "chapters":"20",
+        "description": "Bánh Mì Thơm, Cà Phê Đắng như một cuốn sách tản mạn về những câu chuyện ăn uống nơi phương Tây lạnh giá, đồng thời còn là khám phá về những cảnh vật xung quanh, những con đường, những hàng phố, những dãy cây, những tòa nhà, kể cả những khung trời lộng gió trên tòa chung cư cao ngút.\n\nCuốn sách như những hương vị bất chợt thổi bùng các giác quan và lắng đọng cảm xúc khi tác giả dùng xong các món ăn mới. Đó như là sự kết nối những xúc cảm cực kì rung động, đánh thức những hưởng thụ những tưởng tượng và sự hài hòa đơn thuần trong hương vị “thơm” và “đắng” của tiêu đề, một sự quen thuộc trong ẩm thực Việt Nam.\n\nKhông riêng gì những món ăn quê hương mà quyển sách còn ghi chú thêm về những thức ăn bản địa mà cô có dịp thưởng thức.\n\nKhông hề màu mè hay dài dòng, những điều đặc sắc cũng tự nhiên xuất hiện trong tâm trí ta, ta như ngửi được mùi thơm thoang thoáng, thấy được sắc màu đa dạng của chúng. Đọc rồi mới thấy mình yêu đời hơn và sự cần thiết trong việc lên kế hoạch tận hưởng từng hương vị của cuộc sống, không lãng phí bất kỳ giây phút nào."
+      },
+      {
+        "id":6,
+        "name": "Lịch Sử Việt Nam Bằng Tranh",
+        "author": "Nhiều tác giả",
+        "avatar": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745090506/LOGONXB_hfqgl1.jpg",
+        "star": "4.7",
+        "image": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1744902341/nhasachmienphi-lich-su-viet-nam-bang-tranh-tap-5-nha-tran-thang-giac-nguyen-mong_qohvby.jpg",
+        "publisher": "NXB Tổng hợp TP.HCM",
+        "year": "2019",
+        "price": 0,
+        "tags": ["Lịch sử", "Văn hóa", "Giáo dục"],
+        "language": "Tiếng Việt",
+        "chapters":"15",
+        "description": "Lịch Sử Việt Nam Bằng Tranh là nỗ lực đáng trân trọng của tác giả nhằm phản ánh đất nước và con người Việt Nam theo đúng tiến trình lịch sử với không gian, văn hóa, y phục, tính cách phù hợp với từng thời kỳ, triều đại cụ thể. Bộ sách gồm nhiều tập, mỗi tập viết về thời kỳ hay một nhân vật, một vấn đề tiêu biểu của thời kỳ đó.\n\nTập 5 giới thiệu về cuộc kháng chiến 3 lần chống quân Nguyên – Mông của nhà Trần – những trang sử vẻ vang và hào hùng của dân tộc."
+      },
+      {
+        "id": 7,
+        "name": "Thần thoại Hy Lạp",
+        "author": "Nhiều tác giả",
+        "avatar": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745090506/tt_npj5yj.jpg",
+        "star": "4.6",
+        "image": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1744902340/nhasachmienphi-than-thoai-hy-lap_jb5ccz.jpg",
+        "publisher": "NXB Tri Thức",
+        "year": "2024",
+        "price": 70000,
+        "tags": ["Văn học", "Thần thoại", "Huyền bí"],
+        "language": "Tiếng Việt",
+        "chapters":"30",
+        "description": "“Thần thoại Hy Lạp” bao gồm các truyền thuyết về các vị thần và các vị anh hùng của người Hy Lạp. Bộ sách này hình thành trong một quãng thời gian lịch sử khá dài. Đó là một quá trình lịch sử từ thời kỳ nền văn minh Mycènes (2000 – 1100 TCN) đến những buổi biển diễn, đọc, kể anh hùng ca của Homère trong những ngày hội rồi đến hội diễn bi kịch trong ngày hội Dionysos.\n\nDù hôm nay, thời đại của niềm tin và tư duy thần thoại đã lùi vào quá khứ, cung điện Olympie của các vị thần hẳn đã dời đến một hành tinh nào khác xa xăm, thì những cái tên như Zeus, Éros, Héraclès… hay Achille vẫn truyền cho loài người những âm hưởng thánh thần để chinh phục ngày mai."
+      },
+      {
+        "id": 8,
+        "name": "Dứt tình",
+        "author": "Vũ Trọng Phụng",
+        "avatar": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745090506/tt_npj5yj.jpg",
+        "star": "4.4",
+        "image": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1744902340/nhasachmienphi-dut-tinh_kqmwud.jpg",
+        "publisher": "NXB Tri Thức",
+        "year": "2023",
+        "price": 15000,
+        "tags": ["Tiểu thuyết", "Văn học", "Tình cảm"],
+        "language": "Tiếng Việt",
+        "chapters":"15",
+        "description": "Vũ Trọng Phụng là một nhà văn, nhà báo, một cây bút phóng sự với nhiều bài tiêu biểu. Năm 1930, ông có bài đăng trên Ngọ báo, nhưng lúc này tên tuổi ông chưa thực sự được chú ý trong giới văn học Việt Nam. Mãi đến 1931, vở kịch Không một tiếng vang ra đời, thì mới bắt đầu gây được sự chú ý của bạn đọc. Năm 1934, Vũ Trọng Phụng có tiểu thuyết đầu tay “Dứt tình” (còn có tên khác là Bởi không duyên kiếp) đăng trên tờ Hải Phòng tuần báo. Với tiểu thuyết này, Vũ Trọng Phụng được khen là “ngòi bút tả chân thực đã khéo léo”.\n\n“Dứt tình” là cuốn tiểu thuyết mang tư tưởng định mệnh siêu hình."
+      },
+      {
+        "id": 9,
+        "name": "Ai lấy miếng pho mát của tôi?",
+        "author": "Spencer Johnson",
+        "avatar": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745090505/nxbtre_oti56n.jpg",
+        "star": "4.3",
+        "image": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1744902341/nhasachmienphi-ai-lay-mieng-pho-mat-cua-toi_vwbww9.jpg",
+        "publisher": "NXB Trẻ",
+        "year": "2018",
+        "price": 35000,
+        "tags": ["Kỹ năng sống", "Tâm lý học", "Phát triển bản thân"],
+        "language": "Tiếng Việt",
+        "chapters":"4",
+        "description": "Ai lấy miếng pho mát của tôi – Who Moved My Cheese? – Spencer Johnson\n\nAi lấy miếng pho mát của tôi kể về chuột và người tý hon sống trong thế giới nhỏ bé, mỗi nhân vật có một tính cách đặc trưng, giống như một phần tính cách của con người vậy. Có bốn nhân vật xuất hiện trong câu chuyện này, đó là: Nhạy Bén, Nhanh Nhẹn, Ù Lì và Chậm Chạp. Hai chú chuột Nhạy Bén và Nhanh Nhẹn có suy nghĩ đơn giản và nhanh nhạy trong việc tìm những miếng pho mát còn hai người tý hon là Ù Lì và Chậm Chạp luôn biết tìm những miếng bánh mà họ cho là tuyệt vời nhất. Hàng ngày cả bốn đi kiếm những miếng pho mát ưa thích, tất cả đều phát hiện ra kho pho mát khổng lồ và thưởng thức dần dần.\n\nRồi đến một ngày kia, khi những những miếng pho mát cuối cùng dần hết đi, hai người tý hon trở lại kho cũ và phát hiện không còn miếng nào dành cho họ. Họ nghĩ rằng pho mát của họ sẽ không bao giờ hết, ai đó đã lấy mất chúng. Ngược lại, khi nhận thấy kho pho mát vơi đi, hai chú chuột đã chuẩn bị sẵn sàng. Và lúc trong kho không còn miếng nào nữa, Nhạy Bén và Nhanh Nhẹn đã nhanh chóng lên đường đi tìm kho pho mát khác.\n\nBằng suy nghĩ đơn giản của mình, hai chú chuột đã sớm thay đổi con đường quen thuộc hàng ngày và tìm ra nguồn thức ăn mới. Ngược lại, hai người tý hon vẫn không tin rằng có sự thay đổi bất ngờ như vậy, họ vẫn hàng ngày quay lại kho pho mát cũ với hy vọng mọi thứ sẽ trở về như ban đầu, kho pho mát vẫn đầy như xưa. Cứ như vậy cho đến khi cả Ù Lì và Chậm Chạp dần mất hết sức lực vì đói, tuyệt vọng lớn dần trong họ. Họ chợt nhìn sang Nhạy Bén và Nhanh Nhẹn, hai chú chuột vẫn có được những miếng pho mát mà chúng mong muốn."
+      },
+      {
+        "id": 10,
+        "name": "Émile hay là về giáo dục",
+        "author": "Jean-Jacques Rousseau",
+        "avatar": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745090506/tt_npj5yj.jpg",
+        "star": "4.5",
+        "image": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1744902340/nhasachmienphi-emile-hay-la-ve-giao-duc_vhxzzm.jpg",
+        "publisher": "NXB Tri Thức",
+        "year": "2020",
+        "price": 40000,
+        "tags": ["Triết học", "Giáo dục", "Văn học"],
+        "language": "Tiếng Việt", 
+        "chapters":"5",
+        "description": "Mang một văn phong hài hòa giữa văn chương và triết lý, Émile hay là về giáo dục được các nhà phê bình trên thế giới đánh giá không chỉ là một chuyên luận về giáo dục, mà còn là một tác phẩm về “nghệ thuật hình thành con người”.\n\n Qua nhân vật hư cấu trong cuốn tiểu thuyết là cậu bé Émile, nhà văn muốn chỉ ra mục đích của sự giáo dục nhằm đào tạo một con người tự do, có khả năng tự bảo vệ chống mọi sự gò ép khiên cưỡng.\n\nCuộc đời của Émile được đề cập trong tác phẩm trọn vẹn từ khi cậu ra đời, bập bẹ tập nói đến giai đoạn Émile 20-25 tuổi (độ tuổi khôn lớn và lập gia đình). Khi còn bé, Émile được hướng vào việc học tập, vui chơi giải trí phù hợp với lứa tuổi, đến khi trở thành một chàng trai độc lập, anh được giáo dục về giới tính, thẩm mỹ, tri thức và tình cảm…"
+      }      
+    ]
+>>>>>>> 7c30d73 (add2004)
 }
