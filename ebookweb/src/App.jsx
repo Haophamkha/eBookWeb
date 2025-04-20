@@ -6,7 +6,7 @@ import MainLayout from "./Layouts/mainLayout";
 import AboutUs from "./Pages/aboutUs";
 import MyProfile from "./pages/myprofile";
 import ErrorPage from "./Pages/errorPage";
-import Shop from "./pages/shop";
+import Shop from "./Pages/shop";
 import ShopDetail from "./Pages/shopDetail";
 import Cart from "./pages/cart";
 import ContactUs from "./pages/contactUs";
@@ -21,7 +21,7 @@ function App() {
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/myprofile" element={<MyProfile />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/shop" element={<ShopDetail />} />
+        <Route path="/shop/:id" element={<ShopDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/login" element={<Login />} />
