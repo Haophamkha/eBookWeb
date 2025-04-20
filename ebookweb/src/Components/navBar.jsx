@@ -16,7 +16,6 @@ const navItems = [
     title: "Shop",
     dropdown: [
       { label: "Shop", path: "/shop" },
-      { label: "Shop Detail", path: "/shopdetail" },
       { label: "Cart", path: "/cart" },
     ],
   },
