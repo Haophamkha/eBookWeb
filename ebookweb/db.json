@@ -72,32 +72,31 @@
     }
   ],
   "news": [
-  {
-    "title": "Lợi ích của việc đọc sách: Tăng cường kiến thức và hạnh phúc",
-    "description": "Khám phá cách đọc sách có thể cải thiện khả năng nhận thức, giảm căng thẳng và nâng cao sức khỏe cảm xúc của bạn.",
-    "image": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889702/docsach_e6iidh.webp",
-    "date": "24 March, 2024"
-  },
-  {
-    "title": "10 mẹo cần biết để cải thiện kỹ năng đọc sách của bạn",
-    "description": "Khám phá các mẹo từ các chuyên gia giúp bạn nâng cao hiệu quả đọc sách, cải thiện khả năng hiểu và tận dụng tối đa mỗi cuốn sách.",
-    "image": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889939/kinangdocsach_cqlt3f.png",
-    "date": "18 July, 2024"
-  },
-  {
-    "title": "Tại sao việc đọc sách quan trọng đối với sức khỏe tâm lý?",
-    "description": "Tìm hiểu cách đọc sách có thể là công cụ mạnh mẽ giúp giảm căng thẳng, lo âu và cải thiện giấc ngủ của bạn.",
-    "image": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889937/docsachqt_o8ijft.jpg",
-    "date": "7 June, 2024"
-  },
-  {
-    "title": "Tại sao nên khuyến khích trẻ em đọc sách: Xây dựng nền tảng vững chắc",
-    "description": "Học cách việc phát triển thói quen đọc sách ở trẻ em là rất quan trọng trong việc thúc đẩy khả năng nhận thức, kỹ năng ngôn ngữ và thành công học thuật của chúng.",
-    "image": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889938/treemdocsach_nmdtsp.webp",
-    "date": "30 May, 2024"
-  }
-]
-,
+    {
+      "title": "Lợi ích của việc đọc sách: Tăng cường kiến thức và hạnh phúc",
+      "description": "Khám phá cách đọc sách có thể cải thiện khả năng nhận thức, giảm căng thẳng và nâng cao sức khỏe cảm xúc của bạn.",
+      "image": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889702/docsach_e6iidh.webp",
+      "date": "24 March, 2024"
+    },
+    {
+      "title": "10 mẹo cần biết để cải thiện kỹ năng đọc sách của bạn",
+      "description": "Khám phá các mẹo từ các chuyên gia giúp bạn nâng cao hiệu quả đọc sách, cải thiện khả năng hiểu và tận dụng tối đa mỗi cuốn sách.",
+      "image": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889939/kinangdocsach_cqlt3f.png",
+      "date": "18 July, 2024"
+    },
+    {
+      "title": "Tại sao việc đọc sách quan trọng đối với sức khỏe tâm lý?",
+      "description": "Tìm hiểu cách đọc sách có thể là công cụ mạnh mẽ giúp giảm căng thẳng, lo âu và cải thiện giấc ngủ của bạn.",
+      "image": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889937/docsachqt_o8ijft.jpg",
+      "date": "7 June, 2024"
+    },
+    {
+      "title": "Tại sao nên khuyến khích trẻ em đọc sách: Xây dựng nền tảng vững chắc",
+      "description": "Học cách việc phát triển thói quen đọc sách ở trẻ em là rất quan trọng trong việc thúc đẩy khả năng nhận thức, kỹ năng ngôn ngữ và thành công học thuật của chúng.",
+      "image": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889938/treemdocsach_nmdtsp.webp",
+      "date": "30 May, 2024"
+    }
+  ],
   "reviews": [
     {
       "comment": "Sách rất thú vị và dễ hiểu, mình học được nhiều điều.",
@@ -182,6 +181,68 @@
       "avatar": "https://cdn.jsdelivr.net/gh/faker-js/assets-person-portrait/male/512/61.jpg",
       "stars": 3,
       "id": "12"
+    }
+  ],
+  "books": [
+    {
+      "name": "SECONDS [Part I]",
+      "img": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889702/docsach_e6iidh.webp",
+      "category": ["Biography", "Thriller", "Horror"],
+      "genres": ["Psychological", "Dark", "Suspense"],
+      "description": "Một hành trình ly kỳ xoay quanh sự sống và cái chết trong một khoảnh khắc ngắn ngủi.",
+      "price": 25,
+      "sale": 18.78,
+      "rating": 6.8,
+      "author": "Bryan Lee O'Malley",
+      "imgAuthor": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media2.png"
+    },
+    {
+      "name": "Bí mật của những vì sao",
+      "img": "https://images.unsplash.com/photo-1532012197267-da84d127e765",
+      "category": ["Science", "Adventure", "Fantasy", "Astronomy"],
+      "genres": ["Cosmic", "Exploration", "Sci-fi"],
+      "description": "Khám phá vũ trụ qua những câu chuyện huyền bí và khoa học kỳ thú.",
+      "price": 30,
+      "sale": 21.5,
+      "rating": 8.2,
+      "author": "Carl Sagan",
+      "imgAuthor": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media.png"
+    },
+    {
+      "name": "Lối sống tối giản của người Nhật",
+      "img": "https://images.unsplash.com/photo-1557804506-669a67965ba0",
+      "category": ["Lifestyle", "Self-help", "Philosophy"],
+      "genres": ["Minimalism", "Mindfulness", "Zen"],
+      "description": "Tìm hiểu cách sống gọn gàng, thanh thản và đầy ý nghĩa từ triết lý Nhật Bản.",
+      "price": 20,
+      "sale": 14.99,
+      "rating": 9.1,
+      "author": "Fumio Sasaki",
+      "imgAuthor": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media2.png"
+    },
+    {
+      "name": "Trí tuệ cảm xúc trong công việc",
+      "img": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
+      "category": ["Psychology", "Business", "Productivity"],
+      "genres": ["Emotional Intelligence", "Workplace", "Growth"],
+      "description": "Học cách kiểm soát cảm xúc và tạo ảnh hưởng tích cực nơi công sở.",
+      "price": 35,
+      "sale": 26.25,
+      "rating": 8.7,
+      "author": "Daniel Goleman",
+      "imgAuthor": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media2.png"
+    },
+    {
+      "name": "Vùng đất linh hồn",
+      "img": "https://images.unsplash.com/photo-1516979187457-637abb4f9356",
+      "category": ["Fantasy", "Mystery", "Adventure"],
+      "genres": ["Supernatural", "Mythical", "Spiritual"],
+      "description": "Một thế giới huyền bí nơi mọi linh hồn đều có câu chuyện riêng.",
+      "price": 28,
+      "sale": 20.9,
+      "rating": 8.5,
+      "author": "Hayao Miyazaki",
+      "imgAuthor": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media.png"
     }
   ]
 }
