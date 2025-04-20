@@ -3,6 +3,7 @@ import Header from "../Components/header";
 import Navbar from "../Components/navBar";
 import News from "../Components/news";
 import ReviewList from "../Components/reviewList";
+<<<<<<< HEAD
 import { BookSaleList } from "../Components/BookSaleList";
 import  {BookOnSaleList } from "../Components/BookOnSaleList";
 import { UtilitiesList } from "../Components/UtilitiesList";
@@ -20,6 +21,12 @@ const HomePage = () => {
         <BookOnSaleList/>
         <FeaturedProductList/>
         <BookSaleList/>
+=======
+import ShopDetail from "./shopDetail";
+const HomePage = () => {
+    return (
+        <>   
+>>>>>>> baouyen
         <ReviewList  />
         <News  />
         </>

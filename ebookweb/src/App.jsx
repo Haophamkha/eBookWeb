@@ -7,7 +7,7 @@ import AboutUs from "./Pages/aboutUs";
 import MyProfile from "./pages/myprofile";
 import ErrorPage from "./Pages/errorPage";
 import Shop from "./pages/shop";
-import ShopDetail from "./pages/shopDetail";
+import ShopDetail from "./Pages/shopDetail";
 import Cart from "./pages/cart";
 import ContactUs from "./pages/contactUs";
 import Login from "./Pages/login";
@@ -20,9 +20,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/aboutus" element={<AboutUs />} />
         <Route path="/myprofile" element={<MyProfile />} />
-        
         <Route path="/shop" element={<Shop />} />
-        <Route path="/shopdetail" element={<ShopDetail />} />
+        <Route path="/shop/:id" element={<ShopDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/login" element={<Login />} />
