@@ -11,7 +11,6 @@ const navItems = [
 
 export default function Navbar() {
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
-
   const toggleDropdown = (index) => {
     setOpenDropdownIndex(openDropdownIndex === index ? null : index);
   };
