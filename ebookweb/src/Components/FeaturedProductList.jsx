@@ -6,27 +6,7 @@ import { getBooks } from "../Utils/api";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const PrevArrow = ({ onClick }) => (
-  <button
-    onClick={onClick}
-    className="w-8 h-8 rounded-full bg-orange-300 hover:bg-orange-400 flex items-center justify-center"
-  >
-    <svg className="w-4 h-4" fill="none" stroke="white" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-    </svg>
-  </button>
-);
-
-const NextArrow = ({ onClick }) => (
-  <button
-    onClick={onClick}
-    className="w-8 h-8 rounded-full bg-orange-300 hover:bg-orange-400 flex items-center justify-center"
-  >
-    <svg className="w-4 h-4" fill="none" stroke="white" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-    </svg>
-  </button>
-);
+import { PrevArrow, NextArrow } from "./UIElements";
 
 export const FeaturedProductList = () => {
   const sliderRef = useRef(null);
@@ -40,7 +20,7 @@ export const FeaturedProductList = () => {
         const res = await getBooks();
         setBooks(res.data);
       } catch (error) {
-        console.error("Error fetching featured books:", error);
+        console.error("Lỗi khi lấy danh sách sách nổi bật:", error);
       }
     };
 
@@ -66,55 +46,52 @@ export const FeaturedProductList = () => {
   return (
     <div className="bg-gray-100 min-h-screen py-1">
       <div className="my-32 px-4 max-w-7xl mx-auto relative">
-        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-extrabold text-blue-900">Featured Product</h2>
+          <h2 className="text-4xl font-extrabold text-blue-900">Sản Phẩm Nổi Bật</h2>
           <p className="text-base text-gray-500 mt-3 max-w-2xl mx-auto">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            Khám phá những cuốn sách được yêu thích nhất, mang đến trải nghiệm đọc tuyệt vời với nội dung phong phú và hấp dẫn. Hãy chọn cho mình một cuốn sách phù hợp và bắt đầu hành trình tri thức ngay hôm nay!
           </p>
         </div>
 
         {/* Slider */}
         <Slider ref={sliderRef} {...settings}>
-          {books.map((book, idx) => {
+          {books.map((book) => {
             const prevBook = prevSlideIndex !== null ? books[prevSlideIndex] : null;
+            const salePrice = parseFloat(book.sale) / 1000; // Chuyển chuỗi thành số và chia cho 1000
+            const originalPrice = parseFloat(book.price) / 1000; // Chuyển chuỗi thành số và chia cho 1000
 
             return (
-                <div key={idx} className="relative min-h-[500px]">
-                {/* Card cũ - bên trái, chỉ hiển thị 1 phần bên phải */}
+              <div key={book.id} className="relative min-h-[500px]">
                 {prevBook && (
                   <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[200px] overflow-hidden opacity-30 pointer-events-none z-0">
                     <div className="translate-x-[60%] scale-90">
                       <FeaturedProductCard
                         img={prevBook.img}
                         name={prevBook.name}
-                        genres={prevBook.category}
-                        description={prevBook.description}
-                        price={prevBook.price}
-                        sale={prevBook.sale}
+                        tags={prevBook.tags}
+                        descp={prevBook.descp}
+                        price={parseFloat(prevBook.price) / 1000}
+                        sale={parseFloat(prevBook.sale) / 1000}
                       />
                     </div>
                   </div>
                 )}
-              
-                {/* Card hiện tại */}
+
                 <div className="relative z-10 ml-[120px]">
                   <FeaturedProductCard
                     img={book.img}
                     name={book.name}
-                    genres={book.category}
-                    description={book.description}
-                    price={book.price}
-                    sale={book.sale}
+                    tags={book.tags}
+                    descp={book.descp}
+                    price={originalPrice}
+                    sale={salePrice}
                   />
                 </div>
               </div>
-              
             );
           })}
         </Slider>
 
-        {/* Navigation */}
         <div className="mt-6 flex justify-center items-center space-x-4">
           <PrevArrow onClick={() => sliderRef.current?.slickPrev()} />
           <div className="flex space-x-2">

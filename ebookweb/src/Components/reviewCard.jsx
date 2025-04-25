@@ -13,7 +13,7 @@ export default function ReviewCard({ name, avatar, comment, stars, isHighlighted
         hover:bg-orange-300 hover:text-white hover:shadow-lg
       `}
     >
-      {/* Stars */}
+
       <div className="flex gap-1 mb-4 text-xl">
         {Array.from({ length: maxStars }, (_, i) => (
           <FaStar
@@ -30,7 +30,6 @@ export default function ReviewCard({ name, avatar, comment, stars, isHighlighted
         ))}
       </div>
 
-      {/* Review Text */}
       <div className="flex-grow mb-6">
         <p className={`text-sm break-words line-clamp-3 transition-colors
           ${isHighlighted ? "text-white" : "text-gray-700 group-hover:text-white"}
@@ -39,7 +38,6 @@ export default function ReviewCard({ name, avatar, comment, stars, isHighlighted
         </p>
       </div>
 
-      {/* Profile Info */}
       <div className="flex items-center gap-3">
         <img
           src={avatar}

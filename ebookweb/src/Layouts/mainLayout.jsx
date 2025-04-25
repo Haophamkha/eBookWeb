@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "../Components/footer";
 import Header from "../Components/header";
 import Navbar from "../Components/navBar";
+import {ScrollToTopButton} from "../Components/UIElements";
 
 const MainLayout = () => {
   return (
@@ -12,6 +13,7 @@ const MainLayout = () => {
         <Outlet />
       </main>
       <Footer />
+      <ScrollToTopButton />
     </>
   );
 };

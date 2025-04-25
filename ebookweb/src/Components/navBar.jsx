@@ -1,24 +1,11 @@
 import React, { useState } from "react";
 import { FaChevronDown } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
-
+import { CustomButton } from "./UIElements";
 const navItems = [
   { title: "Home", path: "/" },
-  {
-    title: "Pages",
-    dropdown: [
-      { label: "About Us", path: "/aboutus" },
-      { label: "My profile", path: "/myprofile" },
-      { label: "Error 404", path: "/error" },
-    ],
-  },
-  {
-    title: "Shop",
-    dropdown: [
-      { label: "Shop", path: "/shop" },
-      { label: "Cart", path: "/cart" },
-    ],
-  },
+  {title: "Shop",path: "/shop"   },
+  {title: "About Us",path: "/aboutus"},
   { title: "Contact Us", path: "/contact" },
 ];
 
@@ -72,7 +59,9 @@ export default function Navbar() {
                   to={item.path}
                   className={({ isActive }) =>
                     `px-3 py-2 transition ${
-                      isActive ? "text-orange-500 font-semibold" : "hover:text-orange-400"
+                      isActive
+                        ? "text-orange-500 font-semibold"
+                        : "hover:text-orange-400"
                     }`
                   }
                 >
@@ -85,29 +74,8 @@ export default function Navbar() {
 
         <div className="flex-1" />
 
-        <div className="flex items-center">
-          <NavLink
-            to="/contact"
-            className="bg-orange-400 hover:bg-orange-500 text-white font-semibold px-5 py-2 rounded-md shadow transition mr-16"
-          >
-            Get In Touch
-          </NavLink>
-
-          {/* Đăng nhập & Đăng ký */}
-          <div className="flex items-center gap-2">
-            <NavLink
-              to="/login"
-              className="bg-white border border-orange-400 text-orange-500 hover:bg-orange-50 font-semibold px-4 py-2 rounded-md shadow-sm transition"
-            >
-              Đăng nhập
-            </NavLink>
-            <NavLink
-              to="/register"
-              className="bg-orange-400 hover:bg-orange-500 text-white font-semibold px-4 py-2 rounded-md shadow transition"
-            >
-              Đăng ký
-            </NavLink>
-          </div>
+        <div className="flex items-center pr-30">
+        <CustomButton to="/contact" label="Get in Touch" icon={false} />
         </div>
       </div>
     </nav>

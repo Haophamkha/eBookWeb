@@ -10,7 +10,7 @@ import {RecommendedBookList} from "../Components/RecommendedBookList"
 import {FeaturedProductList} from "../Components/FeaturedProductList"
 import {LogoCard} from "../Components/LogoCard"
 import { BookCarouselHandle } from "../Components/BookCarouselHandle";
-import ShopDetail from "./shopDetail";
+import {CountFeatureList} from "../Components/CountFeatureList";
 const HomePage = () => {
     return (
         <>   
@@ -23,11 +23,10 @@ const HomePage = () => {
         <BookSaleList/>
         <ReviewList  />
         <News  />
+        <CountFeatureList/>
         </>
         
     ) 
-        
-    
 }
 
 export default HomePage;

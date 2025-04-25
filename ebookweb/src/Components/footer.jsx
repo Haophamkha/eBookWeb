@@ -7,10 +7,30 @@ import {
 import { MdLocationOn, MdPhone } from "react-icons/md";
 import { MdOutlineEmail } from "react-icons/md";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 const MotionFooter = motion.footer;
 
 export default function Footer() {
+  const navigate = useNavigate();
+
+  const linkMap = {
+    "About Us": "/about",
+    "Contact Us": "/contact",
+    "eBookStore": "/",
+    "Book Details": "/books",
+    "Shop": "/shop",
+    "Shop Cart": "/cart",
+    "Login": "/login",
+  };
+
+  const handleNavigate = (item) => {
+    const path = linkMap[item];
+    if (path) {
+      navigate(path);
+    }
+  };
+
   return (
     <MotionFooter
       className="bg-white border-t border-gray-200 text-sm text-gray-600"
@@ -19,8 +39,7 @@ export default function Footer() {
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
-      <div className="max-w-7xl mx-auto py-10 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
-        {/* Logo + Intro */}
+      <div className="max-w-7xl mx-auto py-10 px-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         <div className="col-span-1 lg:col-span-1">
           <div className="flex items-center gap-2 mb-2">
             <img src="/ebook-icon.svg" alt="Logo" className="h-8 w-8" />
@@ -49,15 +68,18 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Links */}
-        <div>
+        <div className="ml-20">
           <h4 className="text-indigo-900 font-semibold text-xl mb-3">
             Our Links
           </h4>
           <ul className="space-y-3 text-gray-500 text-lg">
-            {["About Us", "Contact Us"].map((item, idx) => (
-              <li key={idx}>
-                <span className="text-orange-400">&rsaquo;</span> {item}
+            {["About Us", "Contact Us", "Login"].map((item, idx) => (
+              <li
+                key={idx}
+                onClick={() => handleNavigate(item)}
+                className="cursor-pointer hover:underline"
+              >
+                <span className="text-orange-400">›</span> {item}
               </li>
             ))}
           </ul>
@@ -65,31 +87,21 @@ export default function Footer() {
 
         <div>
           <h4 className="text-indigo-900 font-semibold text-xl mb-3">
-            eBookStore ?
+            Our Store
           </h4>
           <ul className="space-y-3 text-gray-500 text-lg">
-            {["eBookStore", "Book Details", "Shop"].map((item, idx) => (
-              <li key={idx}>
-                <span className="text-orange-400">&rsaquo;</span> {item}
+            {["eBookStore", "Book Details", "Shop", "Shop Cart"].map((item, idx) => (
+              <li
+                key={idx}
+                onClick={() => handleNavigate(item)}
+                className="cursor-pointer hover:underline"
+              >
+                <span className="text-orange-400">›</span> {item}
               </li>
             ))}
           </ul>
         </div>
 
-        <div>
-          <h4 className="text-indigo-900 font-semibold text-xl mb-3">
-            Resources
-          </h4>
-          <ul className="space-y-3 text-gray-500 text-lg">
-            {["Shop Cart", "Login", "Partner"].map((item, idx) => (
-              <li key={idx}>
-                <span className="text-orange-400">&rsaquo;</span> {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Contact */}
         <div>
           <h4 className="text-indigo-900 font-semibold text-xl mb-3">
             Get in Touch With Us
@@ -119,7 +131,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Credit */}
       <div className="border-t border-gray-200 py-5 px-4">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center text-lg sm:text-xl text-gray-500">
           <span>

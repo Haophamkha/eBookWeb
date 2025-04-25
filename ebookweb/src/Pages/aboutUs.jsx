@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import FeatureCard from '../Components/FeatureCard';
 import { FaBook, FaAward, FaStore, FaCheck } from 'react-icons/fa';
 import { BackgroundHeader } from '../Components/backgroundHeader';
-import { NavLink } from 'react-router-dom'; // ✅ Thêm NavLink
+import { NavLink } from 'react-router-dom';
 
 const AboutUs = () => {
   const [experience, setExperience] = useState(20);
@@ -25,11 +25,8 @@ const AboutUs = () => {
     <div>
       <BackgroundHeader label="About Us" />
 
-      {/* Phần giới thiệu */}
       <div className="my-14 px-4 max-w-7xl mx-auto flex flex-col md:flex-row gap-10 items-center md:items-start">
-        {/* Phần ảnh bên trái */}
         <div className="flex-1 flex gap-6">
-          {/* Ảnh lớn */}
           <div className="w-[60%] h-[460px] rounded-xl overflow-hidden shadow-lg">
             <img
               src="https://via.placeholder.com/400x460?text=Sách+với+hoa"
@@ -38,7 +35,6 @@ const AboutUs = () => {
             />
           </div>
 
-          {/* Ảnh nhỏ + list */}
           <div className="w-[40%] flex flex-col justify-between h-full">
             <div className="w-full h-[220px] rounded-xl overflow-hidden shadow-lg">
               <img
@@ -63,7 +59,6 @@ const AboutUs = () => {
           </div>
         </div>
 
-        {/* Phần nội dung bên phải */}
         <div className="flex-1 space-y-6">
           <h2 className="text-5xl font-bold text-blue-900">
             Bookland Is Best Choice For Learners
@@ -75,7 +70,6 @@ const AboutUs = () => {
             Distracted.
           </p>
 
-          {/* ✅ NavLink thay cho button */}
           <NavLink
             to="/contact"
             className="bg-orange-400 hover:bg-orange-500 text-white text-lg px-8 py-3 rounded-lg font-semibold w-fit transition"
@@ -83,7 +77,6 @@ const AboutUs = () => {
             Contact Us
           </NavLink>
 
-          {/* Badge 50+ */}
           <div className="ml-72 bg-orange-500 text-white px-6 py-4 rounded-xl shadow-xl z-20 w-52 text-left mt-10">
             <p className="text-[72px] font-extrabold leading-none">{experience}+</p>
             <p className="text-2xl font-semibold tracking-wide">Years of Experience</p>
@@ -91,7 +84,6 @@ const AboutUs = () => {
         </div>
       </div>
 
-      {/* Phần Our Mission */}
       <div className="bg-gray-100 py-14">
         <div className="px-4 max-w-7xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-blue-900 mb-4">Our Mission</h2>

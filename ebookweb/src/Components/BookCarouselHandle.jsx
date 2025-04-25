@@ -5,7 +5,6 @@ import { getBooks } from '../Utils/api';
 export const BookCarouselHandle = () => {
   const [books, setBooks] = useState([]);
 
-  // Lấy dữ liệu từ API
   useEffect(() => {
     const fetchData = async () => {
       try {

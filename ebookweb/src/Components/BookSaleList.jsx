@@ -2,31 +2,13 @@ import { useRef, useEffect, useState } from "react";
 import Slider from "react-slick";
 import { BookSaleCard } from "./BookSaleCard";
 import { getBooks } from "../Utils/api";
+import { motion } from "framer-motion";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { PrevArrow, NextArrow } from "./UIElements";
 
-const PrevArrow = ({ onClick }) => (
-  <button
-    onClick={onClick}
-    className="w-8 h-8 rounded-full bg-orange-300 hover:bg-orange-400 flex items-center justify-center mr-2"
-  >
-    <svg className="w-4 h-4" fill="none" stroke="white" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
-    </svg>
-  </button>
-);
-
-const NextArrow = ({ onClick }) => (
-  <button
-    onClick={onClick}
-    className="w-8 h-8 rounded-full bg-orange-300 hover:bg-orange-400 flex items-center justify-center"
-  >
-    <svg className="w-4 h-4" fill="none" stroke="white" viewBox="0 0 24 24">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-    </svg>
-  </button>
-);
+const MotionDiv = motion.div;
 
 export const BookSaleList = () => {
   const sliderRef = useRef(null);
@@ -36,9 +18,10 @@ export const BookSaleList = () => {
     const fetchData = async () => {
       try {
         const res = await getBooks();
+        console.log("Dữ liệu sách từ API:", res.data);
         setBooks(res.data);
       } catch (error) {
-        console.error("Error fetching books:", error);
+        console.error("Lỗi khi lấy danh sách sách:", error);
       }
     };
 
@@ -72,17 +55,24 @@ export const BookSaleList = () => {
       </div>
 
       <Slider ref={sliderRef} {...settings}>
-        {books.map((book, idx) => (
-          <div key={idx} className="flex justify-center px-3">
+        {books.map((book) => (
+          <MotionDiv
+            key={book.id}
+            className="flex justify-center px-3"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: book.id * 0.2 }}
+          >
             <BookSaleCard
               img={book.img}
               name={book.name}
-              category={book.category}
-              description={book.description}
+              tags={book.tags}
+              descp={book.descp}
               sale={book.sale}
               price={book.price}
             />
-          </div>
+          </MotionDiv>
         ))}
       </Slider>
     </div>

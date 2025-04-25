@@ -1,33 +1,14 @@
 import { useEffect, useState, useRef } from "react";
-import ReviewCard from "./ReviewCard";
+import ReviewCard from "./reviewCard";
 import Slider from "react-slick";
-import { getReviews } from "../Utils/api"; 
+import { getReviews } from "../Utils/api";
+import { motion } from "framer-motion";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { PrevArrow, NextArrow } from "./UIElements";
 
-// Component nút điều hướng tùy chỉnh
-const PrevArrow = ({ onClick }) => (
-  <button
-    onClick={onClick}
-    className="w-8 h-8 rounded-full bg-orange-300 hover:bg-orange-400 flex items-center justify-center mr-2"
-  >
-    <svg className="w-4 h-4" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7"></path>
-    </svg>
-  </button>
-);
-
-const NextArrow = ({ onClick }) => (
-  <button
-    onClick={onClick}
-    className="w-8 h-8 rounded-full bg-orange-300 hover:bg-orange-400 flex items-center justify-center"
-  >
-    <svg className="w-4 h-4" fill="none" stroke="white" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
-    </svg>
-  </button>
-);
+const MotionDiv = motion.div;
 
 export default function ReviewList() {
   const [reviews, setReviews] = useState([]);
@@ -76,7 +57,6 @@ export default function ReviewList() {
 
   return (
     <div className="my-14 px-4 max-w-7xl mx-auto">
-      {/* Phần tiêu đề, chú thích và nút điều hướng */}
       <div className="flex justify-between items-start mb-6">
         <div className="max-w-[50%]">
           <h2 className="text-3xl font-bold text-blue-900">Đánh giá</h2>
@@ -89,10 +69,16 @@ export default function ReviewList() {
           <NextArrow onClick={() => sliderRef.current.slickNext()} />
         </div>
       </div>
-      {/* Slider */}
+
       <Slider ref={sliderRef} {...settings}>
         {reviews.map((review, index) => (
-          <div key={review.id}>
+          <MotionDiv
+            key={review.id}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.2 }}
+          >
             <ReviewCard
               name={review.name}
               avatar={review.avatar}
@@ -100,7 +86,7 @@ export default function ReviewList() {
               stars={review.stars}
               isHighlighted={index === activeIndex}
             />
-          </div>
+          </MotionDiv>
         ))}
       </Slider>
     </div>

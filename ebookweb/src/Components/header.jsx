@@ -1,43 +1,96 @@
+
 import { useState, useEffect } from "react";
 import { ChevronDown, Search } from "lucide-react";
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { getAccount } from "../Utils/api";
 import { IoBookOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { VscAccount } from "react-icons/vsc";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import useUserStore from "../Components/useUserStore";
+import { CustomButton } from "./UIElements";
+import { getBooks } from "../Utils/api";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [showCart, setShowCart] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState("Category");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [books, setBooks] = useState([]);
+  const [isSearchInputFocused, setIsSearchInputFocused] = useState(false);
 
-  const setUser = useUserStore((state) => state.setUser);
-  const { userName, gmail, img } = useUserStore();
+  const { userName, gmail, img, isLoggedIn, clearUser } = useUserStore();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const publicRoutes = ["/", "/login", "/register", "/shop"];
 
   useEffect(() => {
-    getAccount().then((res) => {
-      const randomUser = res.data[Math.floor(Math.random() * res.data.length)];
-      setUser({
-        userName: randomUser.userName,
-        gmail: randomUser.gmail,
-        img: randomUser.img,
+    if (!isLoggedIn && !publicRoutes.includes(location.pathname)) {
+      console.log("User not logged in, redirecting to /login from", location.pathname);
+      navigate("/login");
+    }
+  }, [isLoggedIn, location.pathname, navigate]);
+
+  // Fetch books from API
+  useEffect(() => {
+    const fetchBooks = async () => {
+      try {
+        const response = await getBooks();
+        const booksData = response.data.map((book, index) => ({
+          ...book,
+          id: book.id || index.toString(),
+        }));
+        console.log("Books data from getBooks:", booksData);
+        setBooks(booksData);
+      } catch (error) {
+        console.error("Error fetching books:", error);
+        setBooks([]);
+      }
+    };
+    fetchBooks();
+  }, []);
+
+  const categories = Array.from(
+    new Set(books.flatMap((book) => book.tags || []))
+  ).sort();
+
+  useEffect(() => {
+    let filteredBooks = books;
+    if (searchQuery.trim() !== "") {
+      const keywords = searchQuery.toLowerCase().split(/\s+/).filter((word) => word.length > 0);
+      filteredBooks = filteredBooks.filter((book) => {
+        const title = book.name.toLowerCase();
+        return keywords.every((keyword) => title.includes(keyword));
       });
-    });
-  }, [setUser]);
+    }
+    
+    if (selectedCategory !== "Category") {
+      filteredBooks = filteredBooks.filter((book) =>
+        (book.tags || []).includes(selectedCategory)
+      );
+    }
+
+    setSearchResults(filteredBooks);
+  }, [searchQuery, selectedCategory, books]);
 
   const toggleDropdown = () => setIsOpen((prev) => !prev);
-  const toggleCart = () => setShowCart((prev) => !prev);
   const toggleProfileMenu = () => setShowProfileMenu((prev) => !prev);
 
-  const categories = [
-    "Fiction",
-    "Science",
-    "Business",
-    "Technology",
-    "Romance",
-    "History",
-  ];
+  const handleSearch = () => {
+    if (searchQuery.trim() !== "") {
+      console.log("Searching:", searchQuery);
+    } else {
+      alert("Please enter search content!");
+    }
+  };
+
+  const handleLogout = () => {
+    console.log("Logout called");
+    clearUser();
+    setShowProfileMenu(false);
+    console.log("Redirecting to /login");
+    navigate("/login");
+  };
 
   return (
     <div className="w-full bg-white relative">
@@ -54,35 +107,38 @@ export default function Header() {
         </Link>
 
         {/* Search */}
-        <div className="relative flex items-center bg-gray-100 rounded-md w-full max-w-md h-10">
+        <div className="relative flex items-center bg-gray-100 rounded-md w-full max-w-lg h-12">
           <div className="relative h-full flex items-center">
             <button
               onClick={toggleDropdown}
-              className="flex items-center h-full px-4 text-sm font-medium text-gray-700 bg-gray-100 outline-none"
+              className="flex items-center h-full px-6 text-sm font-medium text-gray-700 bg-gray-100 outline-none"
             >
               {selectedCategory}
               <ChevronDown className="ml-2 h-4 w-4 text-gray-500" />
             </button>
 
             {isOpen && (
-              <div className="absolute z-50 top-full mt-1 left-0 w-36 bg-white border rounded-md shadow-lg">
-                {categories.map((category, index) => (
-                  <a
-                    key={index}
-                    href="#"
-                    onClick={() => {
-                      setSelectedCategory(category);
-                      setIsOpen(false);
-                    }}
-                    className={`block px-3 py-1.5 text-sm hover:bg-gray-100 ${
-                      category === selectedCategory
-                        ? "bg-amber-400 text-white font-semibold"
-                        : "text-gray-700"
-                    }`}
-                  >
-                    {category}
-                  </a>
-                ))}
+              <div className="absolute z-50 top-full mt-1 left-0 bg-white border rounded-md shadow-lg">
+                <div className="max-h-60 overflow-y-auto">
+                  {categories.map((category, index) => (
+                    <div key={index} className="relative">
+                      <a
+                        href="#"
+                        onClick={() => {
+                          setSelectedCategory(category);
+                          setIsOpen(false);
+                        }}
+                        className={`block px-3 py-1.5 text-sm hover:bg-gray-100 w-full text-left ${
+                          category === selectedCategory
+                            ? "bg-amber-400 text-white font-semibold"
+                            : "text-gray-700"
+                        }`}
+                      >
+                        {category}
+                      </a>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
           </div>
@@ -92,78 +148,155 @@ export default function Header() {
           <div className="relative flex-grow">
             <input
               type="text"
-              placeholder="Search Books"
-              className="w-full bg-transparent px-3 py-1.5 outline-none text-sm placeholder-blue-300"
+              placeholder="Search for books here"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onFocus={() => setIsSearchInputFocused(true)}
+              onBlur={() => setTimeout(() => setIsSearchInputFocused(false), 200)}
+              className="w-full bg-transparent px-3 py-1.5 outline-none text-sm placeholder-blue-800"
             />
-            <Search className="absolute right-2 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-500" />
+            <button
+              onClick={handleSearch}
+              className="absolute right-2 top-1/2 transform -translate-y-1/2"
+              style={{ cursor: "pointer" }}
+            >
+              <Search className="w-5 h-5 text-gray-500" />
+            </button>
+
+            {/* Search results dropdown */}
+            {isSearchInputFocused && searchResults.length > 0 && (
+              <div className="absolute z-50 top-full mt-1 left-0 w-full max-w-lg bg-white border rounded-md shadow-lg">
+                <div className="max-h-96 overflow-y-auto">
+                  {searchResults.map((book) => (
+                    <Link
+                      key={book.id}
+                      to={`/book/${book.id}`}
+                      className="flex items-center px-3 py-2 hover:bg-gray-100"
+                      onClick={() => setIsSearchInputFocused(false)}
+                    >
+                      <img
+                        src={book.img}
+                        alt={`Cover of ${book.name}`}
+                        className="w-12 h-16 object-cover mr-3"
+                      />
+                      <div className="flex-grow">
+                        <div className="text-sm font-medium text-gray-800">{book.name}</div>
+                        <div className="flex flex-wrap gap-1 mb-1">
+                          {(book.tags || []).map((tag, index) => (
+                            <span
+                              key={index}
+                              className="text-xs text-teal-600 font-medium"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-orange-400">
+                            ${(parseFloat(book.price) / 1000).toFixed(2)}
+                          </span>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
-        
         <div className="flex items-center gap-4 relative">
-          <Link to="/mybook" className="relative">
-            <IoBookOutline className="w-5 h-5 text-black" />
-            <span className="absolute -top-2 -right-2 text-xs bg-orange-400 text-white rounded-full px-1">
-              21
-            </span>
-          </Link>
+          {isLoggedIn && (
+            <>
+              <Link
+                to="/mybook"
+                className="relative"
+                style={{ marginLeft: "-50px" }}
+              >
+                <IoBookOutline className="w-6 h-6 text-black" />
+                <span className="absolute -top-2 -right-2 text-xs bg-orange-400 text-white rounded-full px-1">
+                  21
+                </span>
+              </Link>
 
-          
-          <div className="relative cursor-pointer">
-            <div onClick={toggleCart}>
-              <MdOutlineShoppingCart className="w-5 h-5 text-black" />
-              <span className="absolute -top-2 -right-2 text-xs bg-orange-400 text-white rounded-full px-1">
-                5
-              </span>
-            </div>
-
-            {/* Cart Overlay */}
-            {showCart && (
-              <div className="absolute top-full right-0 mt-2 w-64 bg-white shadow-lg border rounded-lg p-4 z-40">
-                <h3 className="text-sm font-semibold mb-2">Your Cart</h3>
-                <div className="text-gray-500 text-sm">
-                  Cart is currently empty.
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* User Profile */}
-          <div className="relative">
-            <div
-              className="flex items-center gap-2 text-left cursor-pointer"
-              onClick={toggleProfileMenu}
-            >
-              <img
-                src={img}
-                alt="User Avatar"
-                className="w-8 h-8 rounded-md object-cover"
-              />
-              <div className="leading-tight">
-                <div className="font-semibold text-indigo-900 text-sm">
-                  {userName}
-                </div>
-                <div className="text-xs text-gray-500">{gmail}</div>
-              </div>
-            </div>
-
-            {showProfileMenu && (
-              <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-md z-50">
-                <Link
-                  to="/profile"
-                  className="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                >
-                  Profile
-                </Link>
-                <Link
-                  to="/orders"
-                  className="block px-4 py-2 text-sm hover:bg-gray-100 text-gray-700"
-                >
-                  My Orders
+              <div
+                className="relative cursor-pointer"
+                style={{ marginLeft: "15px", marginRight: "15px" }}
+              >
+                <Link to="/cart" className="relative">
+                  <MdOutlineShoppingCart className="w-6 h-6 text-black" />
+                  <span className="absolute -top-2 -right-2 text-xs bg-orange-400 text-white rounded-full px-1">
+                    5
+                  </span>
                 </Link>
               </div>
-            )}
-          </div>
+            </>
+          )}
+
+          {isLoggedIn ? (
+            <div className="relative">
+              <div
+                className="flex items-center gap-2 text-left cursor-pointer"
+                onClick={toggleProfileMenu}
+              >
+                <img
+                  src={img}
+                  alt="Profile picture"
+                  className="w-12 h-12 rounded-md object-cover"
+                />
+                <div className="leading-tight">
+                  <div className="font-semibold text-indigo-900 text-xl">
+                    {userName}
+                  </div>
+                  <div className="text-xs text-gray-500">{gmail}</div>
+                </div>
+              </div>
+
+              {showProfileMenu && (
+                <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-md z-50 p-2">
+                  <div className="px-4 py-2 border-b-1 border-gray-200">
+                    <div className="font-semibold text-indigo-900">{userName}</div>
+                    <div className="text-xs text-gray-500">{gmail}</div>
+                  </div>
+                  <Link
+                    to="/myprofile"
+                    className="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-100 text-gray-700 border-b"
+                  >
+                    <VscAccount className="w-4 h-4 text-orange-400" />
+                    Profile
+                  </Link>
+                  <CustomButton
+                    label="Log out"
+                    onClick={handleLogout}
+                    icon={null}
+                    width="100%"
+                    className="mt-3"
+                  />
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="flex flex-row gap-2 pt-4">
+              <Link to="/login">
+                <CustomButton
+                  label="Đăng nhập"
+                  icon={null}
+                  to="/login"
+                  bgColor="black"
+                  className="cursor-pointer"
+                />
+              </Link>
+              <Link to="/register">
+                <CustomButton
+                  label="Đăng ký"
+                  icon={null}
+                  to="/register"
+                  bgColor="#FF7F00"
+                  className="cursor-pointer text-black"
+                />
+              </Link>
+            </div>
+          )}
         </div>
       </header>
     </div>
