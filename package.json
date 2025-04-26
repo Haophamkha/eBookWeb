@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "framer-motion": "^12.7.4",
+    "framer-motion": "^12.9.2",
     "lucide-react": "^0.488.0",
     "preline": "^3.0.1",
     "react-countup": "^6.5.3",

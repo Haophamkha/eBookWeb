@@ -6,15 +6,20 @@ export const BookCarousel = ({ books }) => {
   const initialIndex = books.findIndex((book) => book.name === "Vùng đất linh hồn");
   const [currentIndex, setCurrentIndex] = useState(initialIndex !== -1 ? initialIndex : 0);
   const [label, setLabel] = useState("Best Seller");
+  const [fade, setFade] = useState(true);
 
   useEffect(() => {
     if (books.length === 0) return;
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => {
-        const newIndex = (prevIndex + 1) % books.length;
-        setLabel(newIndex === 0 ? "Best Seller" : "Best Management");
-        return newIndex;
-      });
+      setFade(false);
+      setTimeout(() => {
+        setCurrentIndex((prevIndex) => {
+          const newIndex = (prevIndex + 1) % books.length;
+          setLabel(newIndex === 0 ? "Best Seller" : "Best Management");
+          return newIndex;
+        });
+        setFade(true); // 👈 Bật opacity lại
+      }, 500); // Thời gian fade-out
     }, 3000);
     return () => clearInterval(interval);
   }, [books]);
@@ -42,6 +47,7 @@ export const BookCarousel = ({ books }) => {
       }}
     >
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-8 h-full">
+        {/* LEFT SIDE */}
         <div className="md:w-1/2 text-white flex flex-col justify-between h-full min-h-[450px] pr-24 pl-16">
           <h1 className="text-base font-medium tracking-[0.3em] uppercase mb-4 text-gray-300">
             {label.split("").join(" ")}
@@ -94,6 +100,8 @@ export const BookCarousel = ({ books }) => {
             </div>
           </div>
         </div>
+
+        {/* RIGHT SIDE */}
         <div className="md:w-1/2 relative h-[700px] flex justify-center items-end">
           <img
             src={
@@ -101,7 +109,9 @@ export const BookCarousel = ({ books }) => {
               "https://via.placeholder.com/400x600.png?text=Hình+Tác+Giả"
             }
             alt="Tác giả"
-            className="absolute bottom-0 right-0 h-full w-auto max-h-[700px] object-contain z-10 transition-all duration-500"
+            className={`absolute bottom-0 right-0 h-full w-auto max-h-[700px] object-contain z-10 transition-opacity duration-500 ${
+              fade ? "opacity-100" : "opacity-0"
+            }`}
             onError={(e) => {
               e.target.src =
                 "https://via.placeholder.com/400x600.png?text=Hình+Tác+Giả";

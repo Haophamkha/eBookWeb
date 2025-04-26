@@ -2,17 +2,14 @@ import { useRef, useEffect, useState } from "react";
 import Slider from "react-slick";
 import { FeaturedProductCard } from "./FeaturedProductCard";
 import { getBooks } from "../Utils/api";
-
+import { PrevArrow, NextArrow } from "./UIElements";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import { PrevArrow, NextArrow } from "./UIElements";
 
 export const FeaturedProductList = () => {
   const sliderRef = useRef(null);
   const [books, setBooks] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [prevSlideIndex, setPrevSlideIndex] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,20 +29,21 @@ export const FeaturedProductList = () => {
     arrows: false,
     infinite: true,
     speed: 600,
-    autoplay: true,
-    autoplaySpeed: 7000,
+    centerMode: true,
+    centerPadding: "250px",
     slidesToShow: 1,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 7000,
     pauseOnHover: true,
     beforeChange: (current, next) => {
-      setPrevSlideIndex(current);
       setCurrentSlide(next);
     },
   };
 
   return (
     <div className="bg-gray-100 min-h-screen py-1">
-      <div className="my-32 px-4 max-w-7xl mx-auto relative">
+       <div className="my-32 px-4 relative w-full">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-extrabold text-blue-900">Sản Phẩm Nổi Bật</h2>
           <p className="text-base text-gray-500 mt-3 max-w-2xl mx-auto">
@@ -56,37 +54,19 @@ export const FeaturedProductList = () => {
         {/* Slider */}
         <Slider ref={sliderRef} {...settings}>
           {books.map((book) => {
-            const prevBook = prevSlideIndex !== null ? books[prevSlideIndex] : null;
-            const salePrice = parseFloat(book.sale) / 1000; // Chuyển chuỗi thành số và chia cho 1000
-            const originalPrice = parseFloat(book.price) / 1000; // Chuyển chuỗi thành số và chia cho 1000
+            const salePrice = parseFloat(book.sale) / 1000;
+            const originalPrice = parseFloat(book.price) / 1000;
 
             return (
-              <div key={book.id} className="relative min-h-[500px]">
-                {prevBook && (
-                  <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[200px] overflow-hidden opacity-30 pointer-events-none z-0">
-                    <div className="translate-x-[60%] scale-90">
-                      <FeaturedProductCard
-                        img={prevBook.img}
-                        name={prevBook.name}
-                        tags={prevBook.tags}
-                        descp={prevBook.descp}
-                        price={parseFloat(prevBook.price) / 1000}
-                        sale={parseFloat(prevBook.sale) / 1000}
-                      />
-                    </div>
-                  </div>
-                )}
-
-                <div className="relative z-10 ml-[120px]">
-                  <FeaturedProductCard
-                    img={book.img}
-                    name={book.name}
-                    tags={book.tags}
-                    descp={book.descp}
-                    price={originalPrice}
-                    sale={salePrice}
-                  />
-                </div>
+              <div key={book.id} className="px-2">
+                <FeaturedProductCard
+                  img={book.img}
+                  name={book.name}
+                  tags={book.tags}
+                  descp={book.descp}
+                  price={originalPrice}
+                  sale={salePrice}
+                />
               </div>
             );
           })}
@@ -113,6 +93,18 @@ export const FeaturedProductList = () => {
           <NextArrow onClick={() => sliderRef.current?.slickNext()} />
         </div>
       </div>
+
+      <style jsx>{`
+        .slick-slide {
+          opacity: 0.5;
+          transform: scale(0.85);
+          transition: all 0.5s ease;
+        }
+        .slick-center {
+          opacity: 1 !important;
+          transform: scale(1) !important;
+        }
+      `}</style>
     </div>
   );
 };

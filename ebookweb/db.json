@@ -294,7 +294,7 @@
       "id": "11",
       "name": "SECONDS [Part I]",
       "author": "Bryan Lee O'Malley",
-      "author avt": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media2.png",
+      "author_avt": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media2.png",
       "img": "https://res.cloudinary.com/dok0odn5l/image/upload/v1744889702/docsach_e6iidh.webp",
       "tags": [
         "Biography",
@@ -316,7 +316,7 @@
       "id": "12",
       "name": "Bí mật của những vì sao",
       "author": "Carl Sagan",
-      "author avt": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media.png",
+      "author_avt": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media.png",
       "img": "https://images.unsplash.com/photo-1532012197267-da84d127e765",
       "tags": [
         "Science",
@@ -339,7 +339,7 @@
       "id": "13",
       "name": "Lối sống tối giản của người Nhật",
       "author": "Fumio Sasaki",
-      "author avt": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media2.png",
+      "author_avt": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media2.png",
       "img": "https://images.unsplash.com/photo-1557804506-669a67965ba0",
       "tags": [
         "Lifestyle",
@@ -361,7 +361,7 @@
       "id": "14",
       "name": "Trí tuệ cảm xúc trong công việc",
       "author": "Daniel Goleman",
-      "author avt": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media2.png",
+      "author_avt": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media2.png",
       "img": "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f",
       "tags": [
         "Psychology",
@@ -383,7 +383,7 @@
       "id": "15",
       "name": "Vùng đất linh hồn",
       "author": "Hayao Miyazaki",
-      "author avt": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media.png",
+      "author_avt": "https://bookland.dexignzone.com/xhtml/images/banner/banner-media.png",
       "img": "https://images.unsplash.com/photo-1516979187457-637abb4f9356",
       "tags": [
         "Fantasy",
@@ -405,7 +405,7 @@
       "id": "1",
       "name": "Thư viện nửa đêm",
       "author": "Matt Haig",
-      "author avt": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745090506/R_id0q05.jpg",
+      "author_avt": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745090506/R_id0q05.jpg",
       "img": "https://res.cloudinary.com/dmp8j2ai5/image/upload/v1745089611/1_d8pmfw.jpg",
       "tags": [
         "Tiểu thuyết",
@@ -413,6 +413,7 @@
         "Giả tưởng"
       ],
       "descp": "Mỗi cuốn sách chính là cơ hội giúp bạn thử một cuộc sống khác mà bạn có thể đã sống.",
+      "price": "90000",
       "sale": "50000",
       "star": "4.6",
       "publisher": "NXB Văn học",
