@@ -7,7 +7,7 @@ const Shop = () => {
     useEffect(() => {
         fetch("/db.json")
         .then((res) => res.json())
-        .then((data) => setProducts(data.details))
+        .then((data) => setProducts(data.book))
         .catch((err) => console.error("Error loading product data:", err));
     }, []);
 
@@ -18,7 +18,7 @@ const Shop = () => {
                 {products.map((item, index) => (
                 <Link to={`/shop/${item.id}`} state={{ book: item }} 
                     key={index} className="h-90 group-hover:h-100 bg-white shadow border rounded-xl overflow-hidden transition-all transform hover:scale-105 group relative" >
-                    <img src={item.image} alt={item.name} className="h-60 w-full object-contain" />
+                    <img src={item.img} alt={item.name} className="h-60 w-full object-contain" />
                     <div className="p-3 space-y-1 text-center">
                         <h4 className="font-semibold text-sm">{item.name}</h4>
                         <div className="group-hover:opacity-0">
