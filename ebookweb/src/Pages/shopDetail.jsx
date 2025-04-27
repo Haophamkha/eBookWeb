@@ -38,7 +38,7 @@ const ShopDetail = () => {
         <div className="w-[80%] mx-auto p-6">
             <div className="flex flex-col md:flex-row gap-8">
                 <div className="w-full md:w-1/3">
-                    <img src={book.image} alt={book.name} className="w-full object-contain rounded shadow" />
+                    <img src={book.img} alt={book.name} className="w-full object-contain rounded shadow" />
                 </div>
                 <div className="w-full md:w-2/3 space-y-4 p-3">
                     <h2 className="text-2xl font-bold text-blue-900">{book.name}</h2>
@@ -52,7 +52,7 @@ const ShopDetail = () => {
                     </div>
                     <div className="flex gap-4 mt-4">
                         <div className="flex-1">
-                            <img src={book.avatar} alt={book.author} className="w-10 h-10 object-contains mt-1" />
+                            <img src={book.author_avt} alt={book.author} className="w-10 h-10 object-contains mt-1" />
                         </div>
                         <div className="flex-4">
                             <p className="text-gray-600 text-xm">Tác giả</p>
@@ -64,7 +64,7 @@ const ShopDetail = () => {
                         </div>
                     </div>
                     <div className="text-gray-700">
-                    {book.description.split("\n").map((item, index) => (
+                    {book.descp.split("\n").map((item, index) => (
                         <span key={index}>
                         {item}
                         <br />
@@ -96,10 +96,6 @@ const ShopDetail = () => {
                     <tr className="border-b border-gray-200">
                         <th className="px-4 py-3 bg-gray-100 text-gray-600">Người đăng</th>
                         <td className="px-4 py-3 text-gray-700">{book?.publisher}</td>
-                    </tr>
-                    <tr className="border-b border-gray-200">
-                        <th className="px-4 py-3 bg-gray-100 text-gray-600">Ngôn ngữ</th>
-                        <td className="px-4 py-3 text-gray-700">{book?.language}</td>
                     </tr>
                     <tr className="border-b border-gray-200">
                         <th className="px-4 py-3 bg-gray-100 text-gray-600">Số chương</th>
