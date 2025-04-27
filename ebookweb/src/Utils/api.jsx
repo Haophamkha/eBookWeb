@@ -14,7 +14,7 @@ const api = axios.create({
   export const getReviews = () => api.get("/reviews");
   export const getAccount = () => api.get("/accounts");
   export const getAccountById = (userId) => api.get(`/accounts/${userId}`);
-  export const getBooks = () => api.get("/books");
+  export const getBooks = () => api.get("/book");
   export const putData = (endpoint, data) => api.put(endpoint, data);
 
   export const postData = (endpoint, data) => api.post(endpoint, data);
