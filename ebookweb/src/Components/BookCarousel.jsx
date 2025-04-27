@@ -18,8 +18,8 @@ export const BookCarousel = ({ books }) => {
           setLabel(newIndex === 0 ? "Best Seller" : "Best Management");
           return newIndex;
         });
-        setFade(true); // 👈 Bật opacity lại
-      }, 500); // Thời gian fade-out
+        setFade(true); 
+      }, 500); 
     }, 3000);
     return () => clearInterval(interval);
   }, [books]);
