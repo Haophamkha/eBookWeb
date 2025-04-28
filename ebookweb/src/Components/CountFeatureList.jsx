@@ -7,10 +7,10 @@ const MotionDiv = motion.div;
 
 export const CountFeatureList = () => {
   const features = [
-    { icon: <Users size={48} color="#ea9d3a" />, count: 125663, title: 'Happy Customers' },
-    { icon: <BookOpen size={48} color="#ea9d3a" />, count: 50672, title: 'Book Collections' },
-    { icon: <Store size={48} color="#ea9d3a" />, count: 1562, title: 'Our Stores' },
-    { icon: <Leaf size={48} color="#ea9d3a" />, count: 457, title: 'Famous Writers' },
+    { icon: <Users size={48} color="#ea9d3a" />, count: 125663, title: 'Số khách hàng' },
+    { icon: <BookOpen size={48} color="#ea9d3a" />, count: 50672, title: 'Bộ sưu tập sách' },
+    { icon: <Store size={48} color="#ea9d3a" />, count: 1562, title: 'Chuỗi cửa hàng' },
+    { icon: <Leaf size={48} color="#ea9d3a" />, count: 457, title: 'Tác giả nổi tiếng' },
   ];
 
   return (

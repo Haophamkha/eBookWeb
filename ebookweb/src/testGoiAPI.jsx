@@ -1,7 +1,7 @@
 import { TestChapter } from "./TestChapter";
 
 export const TestGoiAPI = () => {
-    const bookId = 2; // ID của sách bạn muốn lấy chương
+    const bookId = 1; // ID của sách bạn muốn lấy chương
     return (
         <div className="App">
         

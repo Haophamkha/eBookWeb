@@ -75,7 +75,7 @@ export default function Navbar() {
         <div className="flex-1" />
 
         <div className="flex items-center pr-30">
-        <CustomButton to="/contact" label="Get in Touch" icon={false} />
+        <CustomButton to="/contact" label="Liên hệ ngay" icon={false} />
         </div>
       </div>
     </nav>

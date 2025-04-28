@@ -166,7 +166,7 @@ export default function Header() {
           <div className="relative flex-grow">
             <input
               type="text"
-              placeholder="Search for books here"
+              placeholder="Tìm kiếm sách ở đây"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onFocus={() => setIsSearchInputFocused(true)}

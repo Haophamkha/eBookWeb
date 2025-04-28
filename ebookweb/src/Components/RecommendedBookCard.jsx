@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { CustomButton } from "./UIElements";
+
+
 export const RecommendedBookCard = ({ img, name, price }) => {
   return (
     <div className="flex flex-col justify-between items-center bg-white rounded-lg shadow-md w-[200px] min-h-[380px]">
