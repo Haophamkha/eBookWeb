@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
+  // const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
     fetch("/db.json")
