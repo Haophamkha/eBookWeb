@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Star, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
 import { CustomButton } from "../Components/UIElements";
-import {getBooks} from "../Utils/api"
+
 const Shop = () => {
   const [products, setProducts] = useState([]);
   // const [filteredProducts, setFilteredProducts] = useState([]);
