@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "firebase": "^11.6.1",
     "framer-motion": "^12.9.2",
     "lucide-react": "^0.488.0",
     "preline": "^3.0.1",

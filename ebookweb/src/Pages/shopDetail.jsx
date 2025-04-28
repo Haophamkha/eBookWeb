@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Star, ArrowLeft } from "lucide-react";
-
+import { CustomButton } from "../Components/UIElements";
 const ShopDetail = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -75,9 +75,7 @@ const ShopDetail = () => {
                         <p className="text-2xl font-semibold text-orange-600">
                             {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND", }).format(book.price)}
                         </p>
-                        <button className="bg-orange-500 text-white px-8 py-3 text-lg rounded hover:bg-orange-600">
-                            Thêm vào giỏ hàng
-                        </button>
+                       <CustomButton height="60px" width="200px" bgColor="#f97316"/>
                     </div>
                 </div>
             </div>

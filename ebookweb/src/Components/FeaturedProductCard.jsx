@@ -1,10 +1,15 @@
 import React from "react";
 import { BuyNowButton, SeeDetailsButton } from "./UIElements";
 
-export const FeaturedProductCard = ({ img, name, tags, descp, price, sale }) => {
-  const salePrice = parseFloat(sale) / 1000; 
-  const originalPrice = parseFloat(price) / 1000;
-  const discountPercent = Math.round(((originalPrice - salePrice) / originalPrice) * 100);
+export const FeaturedProductCard = ({
+  img,
+  name,
+  tags,
+  descp,
+  price,
+  sale,
+}) => {
+  const discountPercent = Math.round(((price - sale) / price) * 100);
 
   return (
     <div className="flex flex-col md:flex-row items-start bg-gray-100 rounded-2xl p-10 max-w-7xl mx-auto min-h-[520px]">
@@ -35,18 +40,26 @@ export const FeaturedProductCard = ({ img, name, tags, descp, price, sale }) => 
             )}
           </div>
 
-          <div className="border-l-2 pl-4 border-gray-300 text-gray-700 text-lg leading-relaxed mb-6">
+          <div className="border-l-2 pl-4 border-gray-300 text-gray-700 text-lg leading-relaxed mb-6 max-h-[200px] overflow-y-auto pr-2">
             {descp}
           </div>
         </div>
 
         <div className="mt-auto flex flex-col">
           <div className="flex items-center flex-wrap gap-6 text-blue-900 mb-6">
-            <span className="text-5xl font-bold">${salePrice.toFixed(2)}</span>
-            <span className="text-orange-500 line-through text-xl font-medium">
-              ${originalPrice.toFixed(2)}
+            <span className="text-5xl font-bold">
+              {new Intl.NumberFormat("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              }).format(sale)}
             </span>
-            <span className="bg-gray-100 text-base font-semibold px-3 py-1 rounded text-gray-800">
+            <span className="text-orange-500 line-through text-2xl font-medium">
+              {new Intl.NumberFormat("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              }).format(price)}
+            </span>
+            <span className="bg-gray-200 text-base font-semibold px-3 py-1 rounded text-gray-800">
               {discountPercent}% GIẢM
             </span>
           </div>

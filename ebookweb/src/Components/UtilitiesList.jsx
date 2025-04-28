@@ -10,27 +10,27 @@ export const UtilitiesList = () => {
   const utilitiesData = [
     {
       icon: AiFillThunderbolt,
-      title: "Quick Delivery",
+      title: "Giao Hàng Nhanh Chóng",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "Nhận hàng chỉ trong thời gian ngắn, đảm bảo đúng hẹn và tiện lợi cho bạn.",
     },
     {
       icon: IoShieldCheckmark,
-      title: "Secure Payment",
+      title: "Thanh Toán An Toàn",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "Giao dịch được bảo mật tuyệt đối, yên tâm mua sắm mà không lo rủi ro.",
     },
     {
       icon: AiFillLike,
-      title: "Best Quality",
+      title: "Chất Lượng Đảm Bảo",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "Sản phẩm được kiểm định kỹ lưỡng, mang đến chất lượng tốt nhất cho bạn.",
     },
     {
       icon: FaStar,
-      title: "Return Guarantee",
+      title: "Bảo Hành Đổi Trả",
       description:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor",
+        "Hỗ trợ đổi trả dễ dàng nếu sản phẩm không đúng như cam kết, bạn hoàn toàn yên tâm.",
     },
   ];
 

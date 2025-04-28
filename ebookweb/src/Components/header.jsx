@@ -12,7 +12,7 @@ import { getBooks } from "../Utils/api";
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState("Category");
+  const [selectedCategory, setSelectedCategory] = useState("Thể loại");
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [books, setBooks] = useState([]);
@@ -163,7 +163,6 @@ export default function Header() {
               <Search className="w-5 h-5 text-gray-500" />
             </button>
 
-            {/* Search results dropdown */}
             {isSearchInputFocused && searchResults.length > 0 && (
               <div className="absolute z-50 top-full mt-1 left-0 w-full max-w-lg bg-white border rounded-md shadow-lg">
                 <div className="max-h-96 overflow-y-auto">
@@ -193,7 +192,7 @@ export default function Header() {
                         </div>
                         <div className="flex items-center gap-2">
                           <span className="text-sm text-orange-400">
-                            ${(parseFloat(book.price) / 1000).toFixed(2)}
+                            {parseFloat(book.price).toLocaleString()} VNĐ
                           </span>
                         </div>
                       </div>

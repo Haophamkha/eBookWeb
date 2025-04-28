@@ -7,6 +7,7 @@ const navItems = [
   {title: "Shop",path: "/shop"   },
   {title: "About Us",path: "/aboutus"},
   { title: "Contact Us", path: "/contact" },
+  { title: "Test", path: "/test" },
 ];
 
 export default function Navbar() {
