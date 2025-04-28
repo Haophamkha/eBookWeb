@@ -17,6 +17,9 @@ export default function Header() {
   const [searchResults, setSearchResults] = useState([]);
   const [books, setBooks] = useState([]);
   const [isSearchInputFocused, setIsSearchInputFocused] = useState(false);
+  const [myBookCount, setMyBookCount] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
+
 
   const { userName, gmail, img, isLoggedIn, clearUser } = useUserStore();
   const navigate = useNavigate();
@@ -31,6 +34,21 @@ export default function Header() {
     }
   }, [isLoggedIn, location.pathname, navigate]);
 
+  useEffect(() => {
+    const updateCounts = () => {
+      const myBook = JSON.parse(localStorage.getItem("myBook")) || [];
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+  
+      setMyBookCount(myBook.length);
+      setCartCount(cart.length);
+    };
+    window.addEventListener("updateCounts", updateCounts);
+    updateCounts();
+    return () => {
+      window.removeEventListener("updateCounts", updateCounts);
+    };
+  }, []);
+  
   // Fetch books from API
   useEffect(() => {
     const fetchBooks = async () => {
@@ -208,28 +226,25 @@ export default function Header() {
         <div className="flex items-center gap-4 relative">
           {isLoggedIn && (
             <>
-              <Link
-                to="/mybook"
-                className="relative"
-                style={{ marginLeft: "-50px" }}
-              >
+              <Link to="/mybook" className="relative" style={{ marginLeft: "-50px" }}>
                 <IoBookOutline className="w-6 h-6 text-black" />
-                <span className="absolute -top-2 -right-2 text-xs bg-orange-400 text-white rounded-full px-1">
-                  21
-                </span>
-              </Link>
-
-              <div
-                className="relative cursor-pointer"
-                style={{ marginLeft: "15px", marginRight: "15px" }}
-              >
-                <Link to="/cart" className="relative">
-                  <MdOutlineShoppingCart className="w-6 h-6 text-black" />
+                {myBookCount > 0 && (
                   <span className="absolute -top-2 -right-2 text-xs bg-orange-400 text-white rounded-full px-1">
-                    5
+                    {myBookCount}
                   </span>
-                </Link>
-              </div>
+                )}
+              </Link>
+              <div className="relative cursor-pointer" style={{ marginLeft: "15px", marginRight: "15px" }}>
+              <Link to="/cart" className="relative">
+                <MdOutlineShoppingCart className="w-6 h-6 text-black" />
+                {cartCount > 0 && (
+                  <span className="absolute -top-2 -right-2 text-xs bg-orange-400 text-white rounded-full px-1">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            </div>
+
             </>
           )}
 

@@ -12,7 +12,7 @@ import Cart from "./pages/cart";
 import ContactUs from "./pages/contactUs";
 import Login from "./Pages/login";
 import Register from "./Pages/registration";
-import MyBook from "./pages/myBook";
+import MyBook from "./Pages/myBook";
 function App() {
   return (
     <Routes>
