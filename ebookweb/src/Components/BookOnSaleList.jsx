@@ -18,9 +18,14 @@ export const BookOnSaleList = () => {
     const fetchData = async () => {
       try {
         const res = await getBooks();
-        setBooks(res.data);
+        // Lọc sale có giá trị
+        const filteredBooks = res.data.filter(
+          (book) => book.sale !== undefined && book.sale !== null && book.sale !== ""
+        );
+        setBooks(filteredBooks);
       } catch (error) {
         console.error("Error fetching books:", error);
+        setBooks([]);
       }
     };
 
@@ -45,7 +50,7 @@ export const BookOnSaleList = () => {
   return (
     <div className="my-14 px-4 max-w-7xl mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-5xl font-bold text-blue-900">Books on Sale</h2>
+        <h2 className="text-5xl font-bold text-blue-900">Sách đang giảm giá</h2>
 
         <div className="flex items-center space-x-4">
           <PrevArrow onClick={() => sliderRef.current?.slickPrev()} />

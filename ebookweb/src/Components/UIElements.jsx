@@ -25,7 +25,8 @@ export const NextArrow = ({ onClick }) => (
 
 export const CustomButton = ({
   width = "auto",
-  label = "Add to Cart",
+  height = "auto",
+  label = "Thêm vào giỏ hàng",
   icon = true,
   to = null,
   onClick,
@@ -36,7 +37,7 @@ export const CustomButton = ({
 
   const handleClick = () => {
     if (onClick) {
-      onClick(); 
+      onClick();
     }
     if (to) {
       navigate(to);
@@ -94,14 +95,16 @@ export const CustomButton = ({
 
       <button
         onClick={handleClick}
-        className={`custom-button group mb-4 flex items-center gap-2 px-5 py-2 text-base text-white rounded-md shadow transition ${className}`}
+        className={`custom-button group mb-4 flex items-center ${className} px-3 py-3 text-base text-white rounded-md shadow transition`}
+
         style={{
           width,
+          height,
           backgroundColor: bgColor,
         }}
       >
         {icon && (
-          <span className="icon-wrapper">
+          <span className="icon-wrapper mr-2">
             <FaShoppingCart className="w-5 h-5" />
           </span>
         )}
@@ -159,7 +162,7 @@ export const BuyNowButton = () => {
       </style>
 
       <button className="buy-now-btn px-5 py-2.5 text-base rounded-lg">
-        <span>Buy Now</span>
+        <span>Mua Ngay</span>
       </button>
     </>
   );
@@ -209,7 +212,7 @@ export const SeeDetailsButton = () => {
       </style>
 
       <button className="see-details-btn px-5 py-2.5 font-semibold rounded-lg">
-        <span>See Details</span>
+        <span>Xem chi tiết</span>
       </button>
     </>
   );
@@ -258,7 +261,3 @@ export const ScrollToTopButton = () => {
     </div>
   );
 };
-
-
-
-

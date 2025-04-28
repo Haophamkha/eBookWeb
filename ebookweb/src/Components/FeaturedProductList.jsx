@@ -42,8 +42,8 @@ export const FeaturedProductList = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen py-1">
-       <div className="my-32 px-4 relative w-full">
+    <div className="featured-product-list bg-gray-100 min-h-screen py-1">
+      <div className="my-32 px-4 relative w-full">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-extrabold text-blue-900">Sản Phẩm Nổi Bật</h2>
           <p className="text-base text-gray-500 mt-3 max-w-2xl mx-auto">
@@ -54,18 +54,18 @@ export const FeaturedProductList = () => {
         {/* Slider */}
         <Slider ref={sliderRef} {...settings}>
           {books.map((book) => {
-            const salePrice = parseFloat(book.sale) / 1000;
-            const originalPrice = parseFloat(book.price) / 1000;
+            
+            
 
             return (
-              <div key={book.id} className="px-2">
+              <div key={book.id} className="px-2 h-[600px] flex items-center justify-center">
                 <FeaturedProductCard
                   img={book.img}
                   name={book.name}
                   tags={book.tags}
                   descp={book.descp}
-                  price={originalPrice}
-                  sale={salePrice}
+                  price={book.price}
+                  sale={book.sale}
                 />
               </div>
             );
@@ -95,12 +95,12 @@ export const FeaturedProductList = () => {
       </div>
 
       <style jsx>{`
-        .slick-slide {
+        .featured-product-list .slick-slide {
           opacity: 0.5;
           transform: scale(0.85);
           transition: all 0.5s ease;
         }
-        .slick-center {
+        .featured-product-list .slick-center {
           opacity: 1 !important;
           transform: scale(1) !important;
         }

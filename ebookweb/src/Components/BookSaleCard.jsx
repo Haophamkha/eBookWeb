@@ -7,8 +7,6 @@ export const BookSaleCard = ({ img, name, tags, descp, sale, price }) => {
       ? descp.slice(0, 120) + "..."
       : descp || "Không có mô tả";
 
-  const salePrice = sale ? parseFloat(sale) / 1000 : 0; 
-  const originalPrice = price ? parseFloat(price) / 1000 : 0; 
   const fallbackImg = "https://via.placeholder.com/400x600.png?text=Bìa+Sách";
 
   return (
@@ -58,11 +56,17 @@ export const BookSaleCard = ({ img, name, tags, descp, sale, price }) => {
 
           <div className="flex flex-col items-end justify-center">
             <div className="flex items-center gap-2 pb-2">
-              <span className="text-2xl text-blue-900 font-bold mr-2">
-                ${salePrice.toFixed(2).replace(".", ",")}
+              <span className="text-xl text-blue-900 font-bold ">
+                {new Intl.NumberFormat("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(sale)}
               </span>
-              <span className="text-xl text-gray-400 line-through font-bold pr-6">
-                ${originalPrice.toFixed(2).replace(".", ",")}
+              <span className="text-sm text-gray-400 line-through font-bold">
+                {new Intl.NumberFormat("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(price)}
               </span>
             </div>
           </div>

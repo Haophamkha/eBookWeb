@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Star, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
-
+import { CustomButton } from "../Components/UIElements";
+import {getBooks} from "../Utils/api"
 const Shop = () => {
   const [products, setProducts] = useState([]);
   // const [filteredProducts, setFilteredProducts] = useState([]);
@@ -70,14 +71,10 @@ const Shop = () => {
               <p className="absolute bottom-10 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 text-xl font-bold text-orange-700">
                 {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.price)}
               </p>
-
-              <button
-                onClick={(e) => addToCart(item, e)}
-                className="absolute bottom-3 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-orange-500 text-white px-1 py-1 text-sm rounded shadow transition-all duration-300 w-[80%] flex items-center justify-center gap-1"
-              >
-                <ShoppingCart size={16} />
-                <p className="whitespace-nowrap">Thêm vào giỏ hàng</p>
-              </button>
+              
+              <div className="absolute bottom-[-15px] left-1/2 transform -translate-x-1/2 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <CustomButton  height="40px" width="200px" bgColor="#f97316" onClick={(e) => addToCart(item, e)}/>
+            </div>
             </Link>
           ))
         ) : (

@@ -1,9 +1,6 @@
 import React from "react";
 
 export const BookOnSaleCard = ({ img, name, tags, star, sale, price }) => {
-  const salePrice = parseFloat(sale) / 1000; 
-  const originalPrice = parseFloat(price) / 1000; 
-
   return (
     <div className="w-full max-w-[220px] p-2">
       <div className="w-full h-64 overflow-hidden rounded-xl mb-3">
@@ -30,10 +27,16 @@ export const BookOnSaleCard = ({ img, name, tags, star, sale, price }) => {
 
         <div className="flex items-end gap-1 ml-auto">
           <span className="text-[16px] font-bold text-[#1E1B4B]">
-            ${salePrice.toFixed(2)}
+          {new Intl.NumberFormat("vi-VN", {
+            style: "currency",
+            currency: "VND",
+          }).format(sale)}
           </span>
           <span className="text-sm text-gray-400 line-through">
-            ${originalPrice.toFixed(2)}
+          {new Intl.NumberFormat("vi-VN", {
+            style: "currency",
+            currency: "VND",
+          }).format(price)}
           </span>
         </div>
       </div>

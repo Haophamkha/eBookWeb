@@ -9,5 +9,3 @@ createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </StrictMode>,
 )
-
-// https://res.cloudinary.com/dok0odn5l/image/upload/v1/book15_mvfugd.jpg

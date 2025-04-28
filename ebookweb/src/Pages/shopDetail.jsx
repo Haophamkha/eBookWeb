@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Star } from "lucide-react";
-
+import { Star, ArrowLeft } from "lucide-react";
+import { CustomButton } from "../Components/UIElements";
 const ShopDetail = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -22,7 +22,7 @@ const ShopDetail = () => {
         console.error("Failed to fetch books:", error);
       }
     };
-    // if (book) fetchBooks();
+    if (book) fetchBooks();
   }, [book]);
 
   if (!book) {
@@ -110,12 +110,7 @@ const ShopDetail = () => {
                 currency: "VND",
               }).format(book.price)}
             </p>
-            <button
-              onClick={handleAddToCart}
-              className="bg-orange-500 text-white px-8 py-3 text-lg rounded hover:bg-orange-600"
-            >
-              Thêm vào giỏ hàng
-            </button>
+            <CustomButton height="60px" width="200px" bgColor="#f97316" onClick={handleAddToCart}/>
           </div>
         </div>
       </div>

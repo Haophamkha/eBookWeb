@@ -70,7 +70,7 @@ export default function Footer() {
 
         <div className="ml-20">
           <h4 className="text-indigo-900 font-semibold text-xl mb-3">
-            Our Links
+            Liên kết
           </h4>
           <ul className="space-y-3 text-gray-500 text-lg">
             {["About Us", "Contact Us", "Login"].map((item, idx) => (
@@ -87,7 +87,7 @@ export default function Footer() {
 
         <div>
           <h4 className="text-indigo-900 font-semibold text-xl mb-3">
-            Our Store
+            Cửa hàng
           </h4>
           <ul className="space-y-3 text-gray-500 text-lg">
             {["eBookStore", "Book Details", "Shop", "Shop Cart"].map((item, idx) => (
@@ -104,7 +104,7 @@ export default function Footer() {
 
         <div>
           <h4 className="text-indigo-900 font-semibold text-xl mb-3">
-            Get in Touch With Us
+            Liên hệ với chúng tôi
           </h4>
           <ul className="space-y-4 text-gray-500 text-lg">
             <li className="flex items-center gap-3">
