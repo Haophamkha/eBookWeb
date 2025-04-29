@@ -1,7 +1,12 @@
 import React from "react";
-import { CustomButton } from "./UIElements";
-
-export const BookSaleCard = ({ img, name, tags, descp, sale, price }) => {
+import { CustomButton, handleAddToCart } from "./UIElements";
+import { useNavigate } from "react-router-dom";
+export const BookSaleCard = ({ img, name, tags, descp, sale, price,book }) => {
+  const navigate = useNavigate();
+  
+    const handleClick = () => {
+      navigate(`/shop/${book.id}`, { state: { book } });
+    };
   const truncatedDesc =
     descp && typeof descp === "string" && descp.length > 120
       ? descp.slice(0, 120) + "..."
@@ -10,7 +15,7 @@ export const BookSaleCard = ({ img, name, tags, descp, sale, price }) => {
   const fallbackImg = "https://via.placeholder.com/400x600.png?text=Bìa+Sách";
 
   return (
-    <div className="rounded-xl w-full mx-auto shadow-md flex flex-col bg-white hover:shadow-lg transition-all duration-300 h-[550px] max-w-[400px]">
+    <div onClick={handleClick} className="rounded-xl w-full mx-auto shadow-md flex flex-col bg-white hover:shadow-lg transition-all duration-300 h-[550px] max-w-[400px]">
       <div className="h-64 overflow-hidden rounded-t-xl">
         <img
           src={img || fallbackImg}
@@ -51,7 +56,7 @@ export const BookSaleCard = ({ img, name, tags, descp, sale, price }) => {
 
         <div className="flex items-center justify-between mt-auto">
           <div className="flex-1">
-            <CustomButton />
+            <CustomButton onClick={()=> handleAddToCart(book)}/>
           </div>
 
           <div className="flex flex-col items-end justify-center">

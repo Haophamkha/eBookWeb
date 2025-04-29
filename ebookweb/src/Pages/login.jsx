@@ -26,10 +26,10 @@ const Login = () => {
 
       if (user) {
         setUser({
-          id: user.id, // Thêm userId
+          id: user.id, 
           userName: user.userName,
           gmail: user.gmail,
-          img: user.img || "https://via.placeholder.com/64x64?text=Avatar", // Đảm bảo có giá trị mặc định
+          img: user.img || "https://via.placeholder.com/64x64?text=Avatar", 
         });
         navigate("/");
       } else {
@@ -109,7 +109,7 @@ const Login = () => {
               <CustomButton
                 type="submit"
                 label="Đăng nhập"
-                width="25%"
+                width="30%"
                 icon={null}
                 className="text-white font-semibold flex items-center justify-center h-12"
               />

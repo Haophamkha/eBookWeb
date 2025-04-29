@@ -74,15 +74,17 @@ export const BookOnSaleList = () => {
       <Slider ref={sliderRef} {...settings}>
         {books.map((book, idx) => (
           <MotionDiv
-            key={idx}
-            className="flex justify-center px-3"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }} 
-            viewport={{ once: true }} 
-            transition={{ duration: 0.8, ease: "easeOut", delay: idx * 0.2 }} 
-          >
-            <BookOnSaleCard {...book} />
-          </MotionDiv>
+          key={idx}
+          className="flex justify-center px-3"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: idx * 0.2 }}
+          whileHover={{ scale: 1.03 }}
+        >
+          <BookOnSaleCard {...book} book={book} />
+        </MotionDiv>
+        
         ))}
       </Slider>
     </div>

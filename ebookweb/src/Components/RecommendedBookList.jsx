@@ -70,6 +70,7 @@ export const RecommendedBookList = () => {
                 img={book.img}
                 name={book.name}
                 price={book.sale}
+                book={book}
               />
             </MotionDiv>
           ))}

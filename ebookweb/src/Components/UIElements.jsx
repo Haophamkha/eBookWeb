@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import { FaArrowUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
-
+import { getAccountById, putData1 } from "../Utils/api";
+import useUserStore from "../Components/useUserStore";
 export const PrevArrow = ({ onClick }) => (
   <button
     onClick={onClick}
@@ -23,26 +24,27 @@ export const NextArrow = ({ onClick }) => (
   </button>
 );
 
+
+
 export const CustomButton = ({
   width = "auto",
   height = "auto",
   label = "Thêm vào giỏ hàng",
-  icon = true,
+  icon = undefined, 
   to = null,
   onClick,
   bgColor = "#eaa451",
   className = "",
+  children,
 }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    if (onClick) {
-      onClick();
-    }
-    if (to) {
-      navigate(to);
-    }
+    if (onClick) onClick();
+    if (to) navigate(to);
   };
+
+  const IconComponent = icon === null ? null : icon || FaShoppingCart;
 
   return (
     <>
@@ -95,24 +97,20 @@ export const CustomButton = ({
 
       <button
         onClick={handleClick}
-        className={`custom-button group mb-4 flex items-center ${className} px-3 py-3 text-base text-white rounded-md shadow transition`}
-
-        style={{
-          width,
-          height,
-          backgroundColor: bgColor,
-        }}
+        className={`custom-button group mb-4 flex items-center justify-center ${className} px-3 py-3 text-base text-white rounded-md shadow transition`}
+        style={{ width, height, backgroundColor: bgColor }}
       >
-        {icon && (
+        {IconComponent && (
           <span className="icon-wrapper mr-2">
-            <FaShoppingCart className="w-5 h-5" />
+            {React.createElement(IconComponent, { size: 16, className: "w-5 h-5" })}
           </span>
         )}
-        <span className="z-10">{label}</span>
+        <span className="z-10">{children || label}</span>
       </button>
     </>
   );
 };
+
 
 CustomButton.propTypes = {
   width: PropTypes.string,
@@ -124,7 +122,7 @@ CustomButton.propTypes = {
   className: PropTypes.string,
 };
 
-export const BuyNowButton = () => {
+export const BuyNowButton = ({ onClick }) => {
   return (
     <>
       <style>
@@ -161,14 +159,13 @@ export const BuyNowButton = () => {
         `}
       </style>
 
-      <button className="buy-now-btn px-5 py-2.5 text-base rounded-lg">
+      <button className="buy-now-btn px-5 py-2.5 text-base rounded-lg" onClick={onClick}>
         <span>Mua Ngay</span>
       </button>
     </>
   );
 };
-
-export const SeeDetailsButton = () => {
+export const SeeDetailsButton = ({ onClick }) => {
   return (
     <>
       <style>
@@ -211,12 +208,13 @@ export const SeeDetailsButton = () => {
         `}
       </style>
 
-      <button className="see-details-btn px-5 py-2.5 font-semibold rounded-lg">
+      <button className="see-details-btn px-5 py-2.5 font-semibold rounded-lg" onClick={onClick}>
         <span>Xem chi tiết</span>
       </button>
     </>
   );
 };
+
 
 export const ScrollToTopButton = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -260,4 +258,103 @@ export const ScrollToTopButton = () => {
       )}
     </div>
   );
+};
+
+
+export const handleAddToCart = async (product) => {
+  const { userId, isLoggedIn } = useUserStore.getState();
+
+  if (!isLoggedIn || !userId) {
+    alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng.");
+    return;
+  }
+
+  try {
+    // Lấy thông tin tài khoản người dùng
+    const res = await getAccountById(userId);
+    const user = res.data;
+
+    // Kiểm tra sản phẩm đã được mua chưa (trong purchasedBooks)
+    const isPurchased = user.purchasedBooks?.includes(product.id);
+    if (isPurchased) {
+      alert(`Sản phẩm "${product.name}" đã được mua và không thể thêm vào giỏ hàng!`);
+      return;
+    }
+
+    // Kiểm tra sản phẩm đã có trong giỏ hàng chưa
+    const isInCart = user.cart?.includes(product.id);
+    if (isInCart) {
+      alert(`Sản phẩm "${product.name}" đã có trong giỏ hàng!`);
+      return;
+    }
+
+    // Thêm ID sách vào giỏ hàng
+    const updatedCart = [...(user.cart || []), product.id];
+
+    // Cập nhật giỏ hàng trên server
+    await putData1(`/Account/${userId}`, {
+      ...user,
+      cart: updatedCart,
+    });
+
+    // Đồng bộ giỏ hàng vào localStorage
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+    // Phát sự kiện updateCounts để Header cập nhật cartCount
+    window.dispatchEvent(new Event("updateCounts"));
+
+    alert(`Đã thêm "${product.name}" vào giỏ hàng!`);
+  } catch (error) {
+    console.error("Lỗi khi thêm vào giỏ hàng:", error);
+    alert("Thêm vào giỏ hàng thất bại. Vui lòng thử lại.");
+  }
+};
+
+
+export const handlePurchaseBook = async (product) => {
+  const { userId, isLoggedIn } = useUserStore.getState();
+
+  // Kiểm tra đăng nhập
+  if (!isLoggedIn || !userId) {
+    alert("Vui lòng đăng nhập để mua sản phẩm.");
+    return;
+  }
+
+  try {
+    // Lấy thông tin tài khoản
+    const res = await getAccountById(userId);
+    const user = res.data;
+
+    // Kiểm tra sản phẩm đã được mua chưa
+    const isPurchased = user.purchasedBooks?.includes(product.id);
+    if (isPurchased) {
+      alert(`Sản phẩm "${product.name}" đã được mua trước đó!`);
+      return;
+    }
+
+    // Thêm sản phẩm vào purchasedBooks
+    const updatedPurchasedBooks = [...(user.purchasedBooks || []), product.id];
+
+    // Xóa sản phẩm khỏi cart nếu có
+    const updatedCart = (user.cart || []).filter((id) => id !== product.id);
+
+    // Cập nhật thông tin người dùng
+    await putData1(`/Account/${userId}`, {
+      ...user,
+      purchasedBooks: updatedPurchasedBooks,
+      cart: updatedCart,
+    });
+
+    // Đồng bộ purchasedBooks và cart vào localStorage
+    localStorage.setItem("myBook", JSON.stringify(updatedPurchasedBooks));
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+    // Phát sự kiện updateCounts để Header cập nhật myBookCount và cartCount
+    window.dispatchEvent(new Event("updateCounts"));
+
+    alert(`Đã mua "${product.name}" thành công!`);
+  } catch (error) {
+    console.error("Lỗi khi mua sản phẩm:", error);
+    alert("Mua sản phẩm thất bại. Vui lòng thử lại.");
+  }
 };

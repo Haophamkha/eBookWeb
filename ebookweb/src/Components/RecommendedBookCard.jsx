@@ -1,15 +1,21 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { CustomButton } from "./UIElements";
+import { CustomButton,handleAddToCart } from "./UIElements";
+import { useNavigate } from "react-router-dom";
 
+export const RecommendedBookCard = ({ img, name, price, book }) => {
+  const navigate = useNavigate();
 
-export const RecommendedBookCard = ({ img, name, price }) => {
+  const handleClick = () => {
+    navigate(`/shop/${book.id}`, { state: { book } });
+  };
   return (
     <div className="flex flex-col justify-between items-center bg-white rounded-lg shadow-md w-[200px] min-h-[380px]">
       <img
         src={img}
         alt={name}
-        className="w-full h-72 object-cover rounded-lg"
+        className="w-full h-72 object-cover rounded-lg cursor-pointer"
+        onClick={handleClick}
       />
 
       <div className="p-3 text-center w-full flex-1 flex flex-col justify-between">
@@ -24,7 +30,10 @@ export const RecommendedBookCard = ({ img, name, price }) => {
         </p>
       </div>
 
-      <CustomButton bgColor="#1a1668" />
+      <CustomButton
+        bgColor="#1a1668"
+        onClick={() => handleAddToCart(book)}
+      />
     </div>
   );
 };
@@ -33,4 +42,5 @@ RecommendedBookCard.propTypes = {
   img: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  product: PropTypes.object.isRequired,
 };

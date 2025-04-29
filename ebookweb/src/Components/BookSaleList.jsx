@@ -71,6 +71,7 @@ export const BookSaleList = () => {
               descp={book.descp}
               sale={book.sale}
               price={book.price}
+              book={book}
             />
           </MotionDiv>
         ))}

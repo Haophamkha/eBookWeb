@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { MdOutlineShoppingCart } from "react-icons/md";
-import { CiShop } from "react-icons/ci";
-import { CiLogin } from "react-icons/ci";
+import { CiShop, CiLogin } from "react-icons/ci";
 import { Link, useNavigate } from "react-router-dom"; 
 import useUserStore from "../Components/useUserStore";
-import { patchData, getAccountById } from "../Utils/api"; 
+import { putData1, getAccountById } from "../Utils/api"; 
+import { Country, State } from "country-state-city";
+import { IoBookOutline } from "react-icons/io5";
 
 const MyProfile = () => {
   const { userId, userName, gmail, img, isLoggedIn, clearUser } = useUserStore(); 
   const navigate = useNavigate(); 
+
+  const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
 
   const [formData, setFormData] = useState({
     userName: userName || "",
@@ -22,22 +26,37 @@ const MyProfile = () => {
     postcode: "",
     city: "",
     fullAddress: "",
+    cart: [],
+    purchasedBooks: []
   });
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      if (!userId) {
-        console.log("User ID not found, skipping fetch");
-        return;
-      }
+    setCountries(Country.getAllCountries());
+  }, []);
 
+  useEffect(() => {
+    if (formData.country) {
+      const selectedCountry = countries.find(c => c.name === formData.country);
+      if (selectedCountry) {
+        const statesList = State.getStatesOfCountry(selectedCountry.isoCode);
+        setStates(statesList);
+      }
+    } else {
+      setStates([]); // Reset states if no country selected
+    }
+  }, [formData.country, countries]);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (!userId) return;
       try {
-        const response = await getAccountById(userId); // Sử dụng getAccountById
+        const response = await getAccountById(userId);
         const userData = response.data;
 
-        setFormData({
-          userName: userData.userName || userName || "",
-          gmail: userData.gmail || gmail || "",
+        setFormData(prev => ({
+          ...prev,
+          userName: userData.userName || "",
+          gmail: userData.gmail || "",
           professionalTitle: userData.professionalTitle || "",
           languages: userData.languages || "",
           age: userData.age || "",
@@ -47,77 +66,40 @@ const MyProfile = () => {
           postcode: userData.postcode || "",
           city: userData.city || "",
           fullAddress: userData.fullAddress || "",
-        });
+          cart: userData.cart || [],
+          purchasedBooks: userData.purchasedBooks || []
+        }));
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
 
     fetchUserData();
-  }, [userId, userName, gmail]);
+  }, [userId]);
 
   useEffect(() => {
-    if (!isLoggedIn) {
-      console.log("User not logged in, redirecting to /login from MyProfile");
-      navigate("/login");
-    }
+    if (!isLoggedIn) navigate("/login");
   }, [isLoggedIn, navigate]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSave = async () => {
-    if (!userId) {
-      alert("User ID not found. Please log in again.");
-      return;
-    }
-
-    const dataToSave = {
-      userName: formData.userName,
-      gmail: formData.gmail,
-      professionalTitle: formData.professionalTitle,
-      languages: formData.languages,
-      age: formData.age,
-      description: formData.description,
-      contactNumber: formData.contactNumber,
-      country: formData.country,
-      postcode: formData.postcode,
-      city: formData.city,
-      fullAddress: formData.fullAddress,
-    };
+    if (!userId) return alert("User ID not found.");
 
     try {
-      await patchData(`/accounts/${userId}`, dataToSave);
+      await putData1(`/Account/${userId}`, formData);
       alert("Settings saved successfully!");
-
-      setFormData({
-        userName: userName || "",
-        gmail: gmail || "",
-        professionalTitle: "",
-        languages: "",
-        age: "",
-        description: "",
-        contactNumber: "",
-        country: "",
-        postcode: "",
-        city: "",
-        fullAddress: "",
-      });
     } catch (error) {
-      console.error("Error saving settings:", error);
-      alert("Failed to save settings. Please try again.");
+      console.error("Save failed:", error);
+      alert(`Save failed: ${error.response?.status || error.message}`);
     }
   };
 
   const handleLogout = () => {
-    console.log("handleLogout called in MyProfile");
     clearUser(); 
-    console.log("Navigating to /login from MyProfile"); 
     navigate("/login"); 
   };
 
@@ -142,17 +124,14 @@ const MyProfile = () => {
           <ul className="space-y-2 w-full">
             <li className="flex items-center text-[#f5a623] font-medium text-sm bg-[#FFF9E5] px-3 py-4 rounded-sm min-h-[60px]">
               <CiShop className="w-5 h-5 mr-2" />
-              Profile
+              Thông tin cá nhân
             </li>
-            {[
-              { icon: <MdOutlineShoppingCart className="w-5 h-5 mr-2" />, label: 'My Cart', to: '/cart' },
+            {[{ icon: <IoBookOutline className="w-5 h-5 mr-2" />, label: 'Sách đã mua', to: '/mybook' },
+              { icon: <MdOutlineShoppingCart className="w-5 h-5 mr-2" />, label: 'Đặt trước', to: '/cart' },
               { icon: <CiShop className="w-5 h-5 mr-2" />, label: 'Shop', to: '/shop' },
-              { icon: <CiLogin className="w-5 h-5 mr-2" />, label: 'Log Out', to: null, onClick: handleLogout },
-            ].map((item, index) => (
-              <li
-                key={index}
-                className="flex items-center text-gray-600 text-sm px-3 py-4 rounded-sm min-h-[60px] hover:bg-[#FFF9E5] hover:text-[#f5a623] cursor-pointer transition-colors"
-              >
+              { icon: <CiLogin className="w-5 h-5 mr-2" />, label: 'Log Out', to: null, onClick: handleLogout }]
+              .map((item, index) => (
+              <li key={index} className="flex items-center text-gray-600 text-sm px-3 py-4 rounded-sm min-h-[60px] hover:bg-[#FFF9E5] hover:text-[#f5a623] cursor-pointer transition-colors">
                 {item.to ? (
                   <Link to={item.to} className="flex items-center w-full">
                     {item.icon}
@@ -172,35 +151,34 @@ const MyProfile = () => {
         <div className="flex-1 pl-6">
           <div className="mb-12">
             <h2 className="text-xl font-bold text-[#1a3c5e] mb-4 border-b-2 border-[#f5a623] inline-block pb-1">
-              BASIC INFORMATION
+              Thông tin cơ bản
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-              {[
-                { label: 'Your Name', name: 'userName', value: formData.userName },
-                { label: 'Professional title', name: 'professionalTitle', value: formData.professionalTitle },
-                { label: 'Languages', name: 'languages', value: formData.languages },
-                { label: 'Age', name: 'age', value: formData.age },
-              ].map((item, i) => (
-                <div key={i}>
-                  <label className="block text-xs font-medium text-gray-600 uppercase">{item.label}:</label>
-                  <input
-                    type="text"
-                    name={item.name}
-                    value={item.value}
-                    onChange={handleInputChange}
-                    placeholder={item.label}
-                    className="mt-1 block w-full p-3 border border-gray-300 rounded-sm bg-gray-100 text-sm placeholder-gray-400"
-                  />
-                </div>
+              {[{ label: 'Tên của bạn', name: 'userName', value: formData.userName },
+                { label: 'Nghề nghiệp', name: 'professionalTitle', value: formData.professionalTitle },
+                { label: 'Ngôn ngữ', name: 'languages', value: formData.languages },
+                { label: 'Tuổi', name: 'age', value: formData.age }]
+                .map((item, i) => (
+                  <div key={i}>
+                    <label className="block text-xs font-medium text-gray-600 uppercase">{item.label}:</label>
+                    <input
+                      type="text"
+                      name={item.name}
+                      value={item.value}
+                      onChange={handleInputChange}
+                      placeholder={item.label}
+                      className="mt-1 block w-full p-3 border border-gray-300 rounded-sm bg-gray-100 text-sm placeholder-gray-400"
+                    />
+                  </div>
               ))}
             </div>
             <div className="mt-6">
-              <label className="block text-xs font-medium text-gray-600 uppercase">Description:</label>
+              <label className="block text-xs font-medium text-gray-600 uppercase">Mô tả:</label>
               <textarea
                 name="description"
                 value={formData.description}
                 onChange={handleInputChange}
-                placeholder="Description"
+                placeholder="Mô tả"
                 className="mt-1 block w-full p-3 border border-gray-300 rounded-sm bg-gray-100 text-sm placeholder-gray-400 h-28"
               />
             </div>
@@ -208,30 +186,93 @@ const MyProfile = () => {
 
           <div>
             <h2 className="text-xl font-bold text-[#1a3c5e] mb-4 border-b-2 border-[#f5a623] inline-block pb-1">
-              CONTACT INFORMATION
+              Thông tin liên lạc
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
-              {[
-                { label: 'Contact Number', name: 'contactNumber', value: formData.contactNumber },
-                { label: 'Email Address', name: 'gmail', value: formData.gmail, readOnly: true },
-                { label: 'Country', name: 'country', value: formData.country },
-                { label: 'Postcode', name: 'postcode', value: formData.postcode },
-                { label: 'City', name: 'city', value: formData.city },
-                { label: 'Full Address', name: 'fullAddress', value: formData.fullAddress },
-              ].map((item, i) => (
-                <div key={i}>
-                  <label className="block text-xs font-medium text-gray-600 uppercase">{item.label}:</label>
-                  <input
-                    type={item.label === 'Email Address' ? 'email' : 'text'}
-                    name={item.name}
-                    value={item.value}
-                    onChange={item.readOnly ? undefined : handleInputChange}
-                    readOnly={item.readOnly}
-                    placeholder={item.label}
-                    className={`mt-1 block w-full p-3 border border-gray-300 rounded-sm bg-gray-100 text-sm placeholder-gray-400 ${item.readOnly ? 'cursor-not-allowed opacity-75' : ''}`}
-                  />
-                </div>
-              ))}
+              <div>
+                <label className="block text-xs font-medium text-gray-600 uppercase">Số điện thoại liên lạc:</label>
+                <input
+                  type="text"
+                  name="contactNumber"
+                  value={formData.contactNumber}
+                  onChange={handleInputChange}
+                  placeholder="SĐT"
+                  className="mt-1 block w-full p-3 border border-gray-300 rounded-sm bg-gray-100 text-sm placeholder-gray-400"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-gray-600 uppercase">Địa chỉ email:</label>
+                <input
+                  type="email"
+                  name="gmail"
+                  value={formData.gmail}
+                  readOnly
+                  className="mt-1 block w-full p-3 border border-gray-300 rounded-sm bg-gray-100 text-sm placeholder-gray-400 cursor-not-allowed opacity-75"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-gray-600 uppercase">Quốc gia:</label>
+                <select
+                  name="country"
+                  value={formData.country}
+                  onChange={(e) => setFormData(prev => ({ ...prev, country: e.target.value, city: "" }))} // Reset city when country changes
+                  className="mt-1 block w-full p-3 border border-gray-300 rounded-sm bg-gray-100 text-sm"
+                >
+                  <option value="">Chọn quốc gia</option>
+                  {countries.map((country) => (
+                    <option key={country.isoCode} value={country.name}>
+                      {country.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-gray-600 uppercase">Tỉnh/Thành phố:</label>
+                <select
+                  name="city"
+                  value={formData.city}
+                  onChange={(e) => setFormData(prev => ({ ...prev, city: e.target.value }))}
+                  className="mt-1 block w-full p-3 border border-gray-300 rounded-sm bg-gray-100 text-sm"
+                >
+                  <option value="">Chọn tỉnh/tp</option>
+                  {states && states.length > 0 ? (
+                    states.map((state) => (
+                      <option key={state.isoCode} value={state.name}>
+                        {state.name}
+                      </option>
+                    ))
+                  ) : (
+                    <option disabled>Chọn quốc gia để xem các tỉnh/thành phố</option>
+                  )}
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-gray-600 uppercase">Mã bưu chính:</label>
+                <input
+                  type="text"
+                  name="postcode"
+                  value={formData.postcode}
+                  onChange={handleInputChange}
+                  placeholder="Mã bưu chính"
+                  className="mt-1 block w-full p-3 border border-gray-300 rounded-sm bg-gray-100 text-sm placeholder-gray-400"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-gray-600 uppercase">Địa chỉ đầy đủ:</label>
+                <input
+                  type="text"
+                  name="fullAddress"
+                  value={formData.fullAddress}
+                  onChange={handleInputChange}
+                  placeholder="Địa chỉ đầy đủ"
+                  className="mt-1 block w-full p-3 border border-gray-300 rounded-sm bg-gray-100 text-sm placeholder-gray-400"
+                />
+              </div>
             </div>
           </div>
 
@@ -240,7 +281,7 @@ const MyProfile = () => {
               onClick={handleSave}
               className="bg-[#f5a623] text-white px-6 py-4 rounded-sm hover:bg-[#e69520] text-sm font-medium"
             >
-              SAVE SETTING
+              Lưu thông tin
             </button>
           </div>
         </div>

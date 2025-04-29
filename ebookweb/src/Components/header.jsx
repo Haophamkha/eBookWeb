@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { ChevronDown, Search } from "lucide-react";
 import { MdOutlineShoppingCart } from "react-icons/md";
@@ -20,13 +19,13 @@ export default function Header() {
   const [myBookCount, setMyBookCount] = useState(0);
   const [cartCount, setCartCount] = useState(0);
 
-
   const { userName, gmail, img, isLoggedIn, clearUser } = useUserStore();
   const navigate = useNavigate();
   const location = useLocation();
 
   const publicRoutes = ["/", "/login", "/register", "/shop"];
 
+  // Redirect if not logged in and not on public route
   useEffect(() => {
     if (!isLoggedIn && !publicRoutes.includes(location.pathname)) {
       console.log("User not logged in, redirecting to /login from", location.pathname);
@@ -34,21 +33,22 @@ export default function Header() {
     }
   }, [isLoggedIn, location.pathname, navigate]);
 
+  // Update myBookCount and cartCount
   useEffect(() => {
     const updateCounts = () => {
       const myBook = JSON.parse(localStorage.getItem("myBook")) || [];
       const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  
       setMyBookCount(myBook.length);
       setCartCount(cart.length);
     };
+
+    updateCounts(); // Gọi ngay khi mount
     window.addEventListener("updateCounts", updateCounts);
-    updateCounts();
     return () => {
       window.removeEventListener("updateCounts", updateCounts);
     };
   }, []);
-  
+
   // Fetch books from API
   useEffect(() => {
     const fetchBooks = async () => {
@@ -68,6 +68,7 @@ export default function Header() {
     fetchBooks();
   }, []);
 
+  // Filter search results
   const categories = Array.from(
     new Set(books.flatMap((book) => book.tags || []))
   ).sort();
@@ -81,8 +82,8 @@ export default function Header() {
         return keywords.every((keyword) => title.includes(keyword));
       });
     }
-    
-    if (selectedCategory !== "Category") {
+
+    if (selectedCategory !== "Thể loại") {
       filteredBooks = filteredBooks.filter((book) =>
         (book.tags || []).includes(selectedCategory)
       );
@@ -98,7 +99,7 @@ export default function Header() {
     if (searchQuery.trim() !== "") {
       console.log("Searching:", searchQuery);
     } else {
-      alert("Please enter search content!");
+      alert("Vui lòng nhập nội dung tìm kiếm!");
     }
   };
 
@@ -142,7 +143,8 @@ export default function Header() {
                     <div key={index} className="relative">
                       <a
                         href="#"
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.preventDefault();
                           setSelectedCategory(category);
                           setIsOpen(false);
                         }}
@@ -222,6 +224,7 @@ export default function Header() {
           </div>
         </div>
 
+        {/* User Actions */}
         <div className="flex items-center gap-4 relative">
           {isLoggedIn && (
             <>
@@ -234,16 +237,15 @@ export default function Header() {
                 )}
               </Link>
               <div className="relative cursor-pointer" style={{ marginLeft: "15px", marginRight: "15px" }}>
-              <Link to="/cart" className="relative">
-                <MdOutlineShoppingCart className="w-6 h-6 text-black" />
-                {cartCount > 0 && (
-                  <span className="absolute -top-2 -right-2 text-xs bg-orange-400 text-white rounded-full px-1">
-                    {cartCount}
-                  </span>
-                )}
-              </Link>
-            </div>
-
+                <Link to="/cart" className="relative">
+                  <MdOutlineShoppingCart className="w-6 h-6 text-black" />
+                  {cartCount > 0 && (
+                    <span className="absolute -top-2 -right-2 text-xs bg-orange-400 text-white rounded-full px-1">
+                      {cartCount}
+                    </span>
+                  )}
+                </Link>
+              </div>
             </>
           )}
 
@@ -268,7 +270,7 @@ export default function Header() {
 
               {showProfileMenu && (
                 <div className="absolute right-0 mt-2 w-48 bg-white border rounded-md shadow-md z-50 p-2">
-                  <div className="px-4 py-2 border-b-1 border-gray-200">
+                  <div className="px-4 py-2 border-b border-gray-200">
                     <div className="font-semibold text-indigo-900">{userName}</div>
                     <div className="text-xs text-gray-500">{gmail}</div>
                   </div>

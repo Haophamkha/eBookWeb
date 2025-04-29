@@ -1,20 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Star, ArrowLeft } from "lucide-react";
-import { CustomButton } from "../Components/UIElements";
+import { CustomButton, handleAddToCart } from "../Components/UIElements";
+import { getBooks, getAccountById } from "../Utils/api";
+import useUserStore from "../Components/useUserStore";
+
 const ShopDetail = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const book = location.state?.book;
-
+  const { userId, isLoggedIn } = useUserStore((state) => state);
   const [relatedBooks, setRelatedBooks] = useState([]);
+  const [bookStatus, setBookStatus] = useState({
+    isPurchased: false,
+    isInCart: false,
+  });
 
   useEffect(() => {
     const fetchBooks = async () => {
       try {
-        const res = await fetch("/db.json");
-        const data = await res.json();
-        const books = data.book;
+        const response = await getBooks();
+        const books = response.data || [];
         const filtered = books.filter((b) => b.id !== book?.id);
         const randomBooks = filtered.sort(() => 0.5 - Math.random()).slice(0, 5);
         setRelatedBooks(randomBooks);
@@ -22,8 +28,30 @@ const ShopDetail = () => {
         console.error("Failed to fetch books:", error);
       }
     };
-    if (book) fetchBooks();
-  }, [book]);
+
+    const checkBookStatus = async () => {
+      if (!isLoggedIn || !userId || !book) {
+        setBookStatus({ isPurchased: false, isInCart: false });
+        return;
+      }
+
+      try {
+        const res = await getAccountById(userId);
+        const user = res.data;
+        const isPurchased = user.purchasedBooks?.includes(book.id);
+        const isInCart = user.cart?.includes(book.id);
+        setBookStatus({ isPurchased, isInCart });
+      } catch (error) {
+        console.error("Lỗi khi kiểm tra trạng thái sách:", error);
+        setBookStatus({ isPurchased: false, isInCart: false });
+      }
+    };
+
+    if (book) {
+      fetchBooks();
+      checkBookStatus();
+    }
+  }, [book, userId, isLoggedIn]);
 
   if (!book) {
     return (
@@ -54,20 +82,6 @@ const ShopDetail = () => {
       }
     }
     return stars;
-  };
-
-  // ===== Thêm vào giỏ hàng =====
-  const handleAddToCart = () => {
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const isInCart = existingCart.find((item) => item.id === book.id);
-
-    if (isInCart) {
-      alert(`Sản phẩm "${book.name}" đã có trong giỏ hàng!`);
-    } else {
-      const updatedCart = [...existingCart, book];
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      alert(`Đã thêm "${book.name}" vào giỏ hàng!`);
-    }
   };
 
   return (
@@ -110,7 +124,39 @@ const ShopDetail = () => {
                 currency: "VND",
               }).format(book.price)}
             </p>
-            <CustomButton height="60px" width="200px" bgColor="#f97316" onClick={handleAddToCart}/>
+            <div className="flex gap-2">
+              {bookStatus.isPurchased ? (
+                <>
+                  <CustomButton
+                    height="70px"
+                    width="200px"
+                    bgColor="#f0ad4e"
+                    label="Đọc"
+                    icon={null}
+                    onClick={() => navigate(`/read/${book.id}`)}
+                    className="text-center font-extrabold text-6xl"
+                  />
+                  
+                </>
+              ) : bookStatus.isInCart ? (
+                <CustomButton
+                  height="70px"
+                  width="200px"
+                  bgColor="#f97316"
+                  label="Thanh toán"
+                  icon={null}
+                  onClick={() => navigate("/cart")}
+                />
+              ) : (
+                <CustomButton
+                  height="70px"
+                  width="200px"
+                  bgColor="#f97316"
+                  label="Thêm vào giỏ hàng"
+                  onClick={() => handleAddToCart(book)}
+                />
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -121,7 +167,6 @@ const ShopDetail = () => {
           <h3 className="text-xl font-semibold mb-4 text-gray-800">Thông tin sản phẩm</h3>
           <table className="w-full border border-gray-300 text-left text-sm md:text-base">
             <tbody>
-              {/* Các dòng thông tin */}
               <tr className="border-b border-gray-200">
                 <th className="px-4 py-3 w-1/3 bg-gray-100 text-gray-600">Tiêu đề</th>
                 <td className="px-4 py-3 text-gray-800">{book?.name}</td>
@@ -181,7 +226,7 @@ const ShopDetail = () => {
                     {item.name}
                   </h4>
                   <p className="text-sm text-gray-600 mt-1">{item.author}</p>
-                  <p className="text-orange-500 font-bold mt-1 ">
+                  <p className="text-orange-500 font-bold mt-1">
                     {new Intl.NumberFormat("vi-VN", { style: "currency", currency: "VND" }).format(item.sale || item.price)}
                   </p>
                 </div>

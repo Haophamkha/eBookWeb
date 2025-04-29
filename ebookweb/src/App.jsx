@@ -12,8 +12,9 @@ import Cart from "./pages/cart";
 import ContactUs from "./Pages/contactUs";
 import Login from "./Pages/login";
 import Register from "./Pages/registration";
-import MyBook from "./pages/myBook";
-import {TestGoiAPI} from "./testGoiAPI"; 
+import MyBook from "./Pages/myBook";
+import TruyenWrapper from './Pages/TruyenWrapper';
+
 function App() {
   return (
     <Routes>
@@ -28,7 +29,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/mybook" element={<MyBook />} />
-        <Route path="/test" element={<TestGoiAPI />} />
+
+        <Route path="/read/:bookId" element={<TruyenWrapper />} />
       </Route>
       <Route path="/error" element={<ErrorPage />} />
     </Routes>

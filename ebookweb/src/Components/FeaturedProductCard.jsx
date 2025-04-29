@@ -1,5 +1,6 @@
 import React from "react";
 import { BuyNowButton, SeeDetailsButton } from "./UIElements";
+import { useNavigate } from "react-router-dom";
 
 export const FeaturedProductCard = ({
   img,
@@ -8,8 +9,20 @@ export const FeaturedProductCard = ({
   descp,
   price,
   sale,
+  onBuyNow,
+  book,
 }) => {
   const discountPercent = Math.round(((price - sale) / price) * 100);
+  const navigate = useNavigate();
+
+  const handleSeeDetails = () => {
+    if (book && book.id) {
+      console.log("Navigating to:", `/shop/${book.id}`);
+      navigate(`/shop/${book.id}`, { state: { book } });
+    } else {
+      console.error("Book or book ID is undefined:", book);
+    }
+  };
 
   return (
     <div className="flex flex-col md:flex-row items-start bg-gray-100 rounded-2xl p-10 max-w-7xl mx-auto min-h-[520px]">
@@ -65,8 +78,8 @@ export const FeaturedProductCard = ({
           </div>
 
           <div className="flex flex-wrap gap-4 py-4">
-            <BuyNowButton />
-            <SeeDetailsButton />
+            <BuyNowButton onClick={onBuyNow} />
+            <SeeDetailsButton onClick={handleSeeDetails} />
           </div>
         </div>
       </div>

@@ -1,8 +1,7 @@
-
 import React, { useState } from "react";
 import { BackgroundHeader } from "../Components/backgroundHeader";
 import { useNavigate } from "react-router-dom";
-import { getAccount, postData } from "../Utils/api";
+import { getAccount, postData1 } from "../Utils/api";
 
 const Registration = () => {
   const [userName, setUserName] = useState("");
@@ -72,10 +71,21 @@ const Registration = () => {
         password,
         img: "https://via.placeholder.com/150",
         id: String(accounts.length + 1),
+        professionalTitle: "",
+        languages: "",
+        age: "",
+        description: "",
+        contactNumber: "",
+        country: "",
+        postcode: "",
+        city: "",
+        fullAddress: "",
+        cart: [],
+        purchasedBooks: []
       };
 
       console.log("Gửi tài khoản mới:", newUser);
-      await postData("/accounts", newUser);
+      await postData1("/Account", newUser); 
       setSuccess("Đăng ký thành công!");
       setUserName("");
       setEmail("");
@@ -86,9 +96,9 @@ const Registration = () => {
     } catch (err) {
       console.error("Lỗi chi tiết khi đăng ký:", err.message, err.response?.data);
       if (err.code === "ERR_NETWORK") {
-        setEmailError("Không thể kết nối đến server. Vui lòng kiểm tra json-server.");
+        setEmailError("Không thể kết nối đến server. Vui lòng kiểm tra server.");
       } else if (err.response?.status === 404) {
-        setEmailError("Không tìm thấy API. Vui lòng kiểm tra cấu hình json-server.");
+        setEmailError("Không tìm thấy API. Vui lòng kiểm tra cấu hình server.");
       } else {
         setEmailError("Đã xảy ra lỗi. Vui lòng thử lại sau.");
       }

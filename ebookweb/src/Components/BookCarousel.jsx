@@ -1,39 +1,77 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { BookMiniCard } from "./BookMiniCard";
-import { BuyNowButton } from "./UIElements";
+import { BuyNowButton, handleAddToCart } from "./UIElements";
+import { useNavigate } from "react-router-dom";
 
 export const BookCarousel = ({ books }) => {
-  const initialIndex = books.findIndex((book) => book.name === "Vùng đất linh hồn");
-  const [currentIndex, setCurrentIndex] = useState(initialIndex !== -1 ? initialIndex : 0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [fade, setFade] = useState(true);
+  const [isAddingToCart, setIsAddingToCart] = useState(false);
+  const navigate = useNavigate();
 
+  const bannerImages = [
+    "/CarouselImg/banner-media.png",
+    "/CarouselImg/banner-media2.png",
+    "/CarouselImg/banner-media3.png",
+    "/CarouselImg/banner-media4.png",
+    "/CarouselImg/banner-media5.png",
+  ];
+
+  const randomBooks = useMemo(() => {
+    if (books.length === 0) return [];
+    const shuffled = [...books].sort(() => 0.5 - Math.random());
+    const selectedBooks = shuffled.slice(0, Math.min(5, books.length));
+    return selectedBooks.map((book, index) => ({
+      ...book,
+      bannerImage: bannerImages[index % bannerImages.length],
+    }));
+  }, [books]);
+
+  // Auto-slide effect
   useEffect(() => {
-    if (books.length === 0) return;
+    if (randomBooks.length <= 1) return;
     const interval = setInterval(() => {
       setFade(false);
       setTimeout(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % books.length);
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % randomBooks.length);
         setFade(true);
       }, 500);
     }, 3000);
     return () => clearInterval(interval);
-  }, [books]);
+  }, [randomBooks.length]);
 
-  if (books.length === 0) return <div>Đang tải...</div>;
+  const handleAddToCartWithLoading = async (book) => {
+    setIsAddingToCart(true);
+    try {
+      await handleAddToCart(book);
+    } catch (error) {
+      console.error("Lỗi khi thêm vào giỏ hàng:", error);
+    } finally {
+      setIsAddingToCart(false);
+    }
+  };
 
-  const currentBook = books[currentIndex];
-  const price = parseFloat(currentBook.price);
-  const sale = parseFloat(currentBook.sale);
-  const discount = Math.round(((price - sale) / price) * 100) + "% GIẢM";
+  // Handle view full description
+  const handleViewFullDesc = (book) => {
+    navigate(`/shop/${book.id}`, { state: { book } });
+  };
+
+  if (randomBooks.length === 0) return <div className="text-center text-white py-10">Đang tải...</div>;
+
+  const currentBook = randomBooks[currentIndex];
+  const price = parseFloat(currentBook.price || 0);
+  const sale = parseFloat(currentBook.sale || price);
+  const discount = price > sale ? Math.round(((price - sale) / price) * 100) + "% GIẢM" : "";
 
   const maxDescLength = 200;
-  const shortDesc = currentBook.descp.length > maxDescLength 
-    ? currentBook.descp.slice(0, maxDescLength) + "... xem thêm" 
-    : currentBook.descp;
+  const isDescLong = currentBook.descp?.length > maxDescLength;
+  const shortDesc = isDescLong
+    ? currentBook.descp.slice(0, maxDescLength) + "..."
+    : currentBook.descp || "Không có mô tả";
 
   const displayedBooks = [
-    books[(currentIndex - 1 + books.length) % books.length],
-    books[currentIndex],
+    randomBooks[(currentIndex - 1 + randomBooks.length) % randomBooks.length],
+    randomBooks[currentIndex],
   ];
 
   return (
@@ -50,16 +88,22 @@ export const BookCarousel = ({ books }) => {
         {/* LEFT SIDE */}
         <div className="md:w-1/2 text-white flex flex-col h-full min-h-[450px] pr-24 pl-16">
           <div className="flex-1 flex flex-col">
-            <h2 className="text-6xl font-bold mb-4">{currentBook.name}</h2>
+            <h2 className="text-6xl font-bold mb-4">{currentBook.name || "Không có tiêu đề"}</h2>
             <p className="text-xl font-semibold text-yellow-100 mb-4">
-              {currentBook.author}
+              {currentBook.author || "Tác giả không xác định"}
               <span className="text-base text-yellow-100 font-normal ml-10">
-                {currentBook.tags[0] || "Không xác định"}
+                {currentBook.tags?.[0] || "Không xác định"}
               </span>
             </p>
             <div className="max-w-lg mb-6 min-h-[120px] flex items-start">
-              <p className="border-l-2 pl-4 border-yellow-100 text-gray-300 text-base leading-relaxed inline-block">
+              <p
+                className="border-l-2 pl-4 border-yellow-100 text-gray-300 text-base leading-relaxed inline-block cursor-pointer"
+                onClick={() => isDescLong && handleViewFullDesc(currentBook)}
+              >
                 {shortDesc}
+                {isDescLong && (
+                  <span className="text-yellow-300 hover:underline ml-1">xem thêm</span>
+                )}
               </p>
             </div>
           </div>
@@ -67,16 +111,27 @@ export const BookCarousel = ({ books }) => {
             <span className="text-2xl font-bold text-yellow-400 mr-4">
               {sale.toLocaleString()} VNĐ
             </span>
-            <span className="text-base text-gray-500 line-through mr-4">
-              {price.toLocaleString()} VNĐ
-            </span>
-            <span className="bg-pink-500 text-white text-xs font-semibold px-2 py-1 rounded">
-              {discount}
-            </span>
+            {price > sale && (
+              <>
+                <span className="text-base text-gray-500 line-through mr-4">
+                  {price.toLocaleString()} VNĐ
+                </span>
+                <span className="bg-pink-500 text-white text-xs font-semibold px-2 py-1 rounded">
+                  {discount}
+                </span>
+              </>
+            )}
           </div>
           <div className="flex space-x-4 mb-6">
-            <BuyNowButton />
-            <button className="border border-white hover:bg-white hover:text-black text-white font-semibold px-6 py-3 rounded transition">
+            <BuyNowButton
+              onClick={() => handleAddToCartWithLoading(currentBook)}
+              disabled={isAddingToCart}
+            />
+            <button
+              className="border border-white hover:bg-white hover:text-black text-white font-semibold px-6 py-3 rounded transition disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={() => navigate(`/shop/${currentBook.id}`, { state: { book: currentBook } })}
+              disabled={isAddingToCart}
+            >
               Xem Chi Tiết
             </button>
           </div>
@@ -105,17 +160,13 @@ export const BookCarousel = ({ books }) => {
         {/* RIGHT SIDE */}
         <div className="md:w-1/2 relative h-[700px] flex justify-center items-end">
           <img
-            src={
-              currentBook.author_avt ||
-              "https://via.placeholder.com/400x600.png?text=Hình+Tác+Giả"
-            }
-            alt="Tác giả"
+            src={currentBook.bannerImage}
+            alt="Banner sách"
             className={`absolute bottom-0 right-0 h-full w-auto max-h-[700px] object-contain z-10 transition-opacity duration-500 ${
               fade ? "opacity-100" : "opacity-0"
             }`}
             onError={(e) => {
-              e.target.src =
-                "https://via.placeholder.com/400x600.png?text=Hình+Tác+Giả";
+              e.target.src = "https://via.placeholder.com/400x600.png?text=Banner+Sách";
             }}
           />
           <div className="flex space-x-4 absolute bottom-8 right-12 z-20 bg-opacity-50 p-4 rounded-lg">

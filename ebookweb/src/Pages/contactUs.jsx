@@ -50,7 +50,7 @@ const ContactUs = () => {
 
       <div className="w-full">
         <img
-          src="bg3.png"
+          src="image.png"
           alt="Map Location"
           className="w-full h-80 object-cover"
         />

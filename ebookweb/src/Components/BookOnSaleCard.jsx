@@ -1,8 +1,18 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-export const BookOnSaleCard = ({ img, name, tags, star, sale, price }) => {
+export const BookOnSaleCard = ({ img, name, tags, star, sale, price, book }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/shop/${book.id}`, { state: { book } });
+  };
+
   return (
-    <div className="w-full max-w-[220px] p-2">
+    <div
+      onClick={handleClick}
+      className="w-full max-w-[220px] p-2 cursor-pointer hover:scale-105 transition-transform"
+    >
       <div className="w-full h-64 overflow-hidden rounded-xl mb-3">
         <img
           src={img}
@@ -27,16 +37,16 @@ export const BookOnSaleCard = ({ img, name, tags, star, sale, price }) => {
 
         <div className="flex items-end gap-1 ml-auto">
           <span className="text-[16px] font-bold text-[#1E1B4B]">
-          {new Intl.NumberFormat("vi-VN", {
-            style: "currency",
-            currency: "VND",
-          }).format(sale)}
+            {new Intl.NumberFormat("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            }).format(sale)}
           </span>
           <span className="text-sm text-gray-400 line-through">
-          {new Intl.NumberFormat("vi-VN", {
-            style: "currency",
-            currency: "VND",
-          }).format(price)}
+            {new Intl.NumberFormat("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            }).format(price)}
           </span>
         </div>
       </div>

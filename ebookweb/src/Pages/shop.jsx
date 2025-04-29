@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { Star, ShoppingCart } from "lucide-react";
 import { Link } from "react-router-dom";
-import { CustomButton } from "../Components/UIElements";
+import { CustomButton , handleAddToCart} from "../Components/UIElements";
+import { getBooks } from "../Utils/api";
+
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
-  // const [filteredProducts, setFilteredProducts] = useState([]);
 
   useEffect(() => {
-    fetch("/db.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const loadedProducts = data.book || [];
+    getBooks()
+      .then((response) => {
+        const loadedProducts = response.data || [];
 
         const myBooks = JSON.parse(localStorage.getItem("myBook")) || [];
         const myBookIds = myBooks.map((book) => book.id);
 
-        // Lọc bỏ những sách đã có trong myBook
         const availableProducts = loadedProducts.filter(
           (product) => !myBookIds.includes(product.id)
         );
@@ -25,20 +24,6 @@ const Shop = () => {
       })
       .catch((err) => console.error("Error loading product data:", err));
   }, []);
-
-  const addToCart = (product, e) => {
-    e.preventDefault(); // Ngăn hành động mặc định của Link
-    const existingCart = JSON.parse(localStorage.getItem("cart")) || [];
-    const isInCart = existingCart.find((item) => item.id === product.id);
-
-    if (isInCart) {
-      alert(`Sản phẩm "${product.name}" đã có trong giỏ hàng!`);
-    } else {
-      const updatedCart = [...existingCart, product];
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      alert(`Đã thêm "${product.name}" vào giỏ hàng!`);
-    }
-  };
 
   return (
     <div className="w-[80%] mx-auto p-6">
@@ -71,10 +56,18 @@ const Shop = () => {
               <p className="absolute bottom-10 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 text-xl font-bold text-orange-700">
                 {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(item.price)}
               </p>
-              
+
               <div className="absolute bottom-[-15px] left-1/2 transform -translate-x-1/2 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <CustomButton  height="40px" width="200px" bgColor="#f97316" onClick={(e) => addToCart(item, e)}/>
-            </div>
+                <CustomButton
+                  height="40px"
+                  width="200px"
+                  bgColor="#f97316"
+                  onClick={(e) => {
+                    e.preventDefault(); // Ngăn hành động mặc định của Link
+                    handleAddToCart(item); // Gọi handleAddToCart từ cartUtils
+                  }}
+                />
+              </div>
             </Link>
           ))
         ) : (

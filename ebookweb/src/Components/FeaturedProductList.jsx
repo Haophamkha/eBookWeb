@@ -5,7 +5,7 @@ import { getBooks } from "../Utils/api";
 import { PrevArrow, NextArrow } from "./UIElements";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import {handleAddToCart} from "../Components/UIElements";
 export const FeaturedProductList = () => {
   const sliderRef = useRef(null);
   const [books, setBooks] = useState([]);
@@ -66,6 +66,8 @@ export const FeaturedProductList = () => {
                   descp={book.descp}
                   price={book.price}
                   sale={book.sale}
+                  onBuyNow={() => handleAddToCart(book)}
+                  book={book}
                 />
               </div>
             );

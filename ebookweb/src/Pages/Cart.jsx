@@ -1,16 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { getCartItemsFromAPI } from "../Utils/api";
+import useUserStore from "../Components/useUserStore";
+import { handlePurchaseBook } from "../Components/UIElements";
+import { getAccountById, putData1 } from "../Utils/api";
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
   const [selectedItems, setSelectedItems] = useState([]);
   const [total, setTotal] = useState(0);
   const navigate = useNavigate();
+  const { userId, isLoggedIn } = useUserStore((state) => state);
 
   useEffect(() => {
-    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
-    setCartItems(storedCart);
-  }, []);
+    const fetchCartData = async () => {
+      if (!isLoggedIn || !userId) {
+        alert("Vui lòng đăng nhập để xem giỏ hàng!");
+        return;
+      }
+
+      try {
+        const { data } = await getCartItemsFromAPI(userId);
+        console.log("Dữ liệu giỏ hàng từ API:", data);
+        if (data.length > 0) {
+          setCartItems(data);
+        } else {
+          setCartItems([]);
+          
+        }
+      } catch (error) {
+        console.error("Lỗi khi lấy giỏ hàng từ API:", error);
+        alert("Không thể tải giỏ hàng. Vui lòng thử lại.");
+      }
+    };
+
+    if (userId) {
+      fetchCartData();
+    }
+  }, [userId, isLoggedIn]);
 
   useEffect(() => {
     const selectedProducts = cartItems.filter((p) =>
@@ -32,36 +58,72 @@ const Cart = () => {
 
   const handleSelectAll = () => {
     if (selectedItems.length === cartItems.length) {
-      setSelectedItems([]); // Nếu đã chọn hết thì bỏ chọn
+      setSelectedItems([]);
     } else {
       const allIds = cartItems.map((item) => item.id);
-      setSelectedItems(allIds); // Chọn tất cả
+      setSelectedItems(allIds);
     }
   };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (selectedItems.length === 0) {
       alert("Bạn chưa chọn sản phẩm nào để thanh toán.");
       return;
     }
 
-    const purchasedBooks = cartItems.filter((item) =>
-      selectedItems.includes(item.id)
-    );
-    const storedMyBooks = JSON.parse(localStorage.getItem("myBook")) || [];
-    const updatedMyBooks = [...storedMyBooks, ...purchasedBooks];
-    localStorage.setItem("myBook", JSON.stringify(updatedMyBooks));
+    try {
+      // Lọc các sản phẩm được chọn
+      const purchasedBooks = cartItems.filter((item) =>
+        selectedItems.includes(item.id)
+      );
 
-    const remainingCart = cartItems.filter(
-      (item) => !selectedItems.includes(item.id)
-    );
-    setCartItems(remainingCart);
-    localStorage.setItem("cart", JSON.stringify(remainingCart));
+      // Gọi handlePurchaseBook cho từng sản phẩm
+      for (const book of purchasedBooks) {
+        await handlePurchaseBook(book);
+      }
 
-    setSelectedItems([]);
-    setTotal(0);
+      // Tải lại giỏ hàng từ server để đảm bảo đồng bộ
+      const { data } = await getCartItemsFromAPI(userId);
+      if (data.length > 0) {
+        setCartItems(data);
+      } else {
+        setCartItems([]);
+      }
+      setSelectedItems([]);
+      setTotal(0);
 
-    alert("Thanh toán thành công! Sách đã được thêm vào mục My Book.");
+      alert("Thanh toán thành công! Sách đã được thêm vào mục My Book.");
+    } catch (error) {
+      console.error("Lỗi khi thanh toán:", error);
+      alert("Thanh toán thất bại. Vui lòng thử lại.");
+    }
+  };
+
+  const handleRemoveItem = async (itemId) => {
+    try {
+      // Lấy thông tin tài khoản
+      const accountRes = await getAccountById(userId);
+      const user = accountRes.data;
+
+      // Xóa ID sách khỏi cart
+      const updatedCart = (user.cart || []).filter((id) => id !== itemId);
+
+      // Cập nhật cart trên server
+      await putData1(`/Account/${userId}`, {
+        ...user,
+        cart: updatedCart,
+      });
+
+      // Cập nhật giao diện
+      const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
+      setCartItems(updatedCartItems);
+      if (selectedItems.includes(itemId)) {
+        setSelectedItems(selectedItems.filter((id) => id !== itemId));
+      }
+    } catch (error) {
+      console.error("Lỗi khi xóa sách khỏi giỏ hàng:", error);
+      alert("Không thể xóa sách. Vui lòng thử lại.");
+    }
   };
 
   return (
@@ -73,7 +135,9 @@ const Cart = () => {
           onClick={handleSelectAll}
           className="bg-orange-600 hover:bg-orange-600 text-white font-semibold px-6 py-2 rounded-md"
         >
-          {selectedItems.length === cartItems.length ? "Bỏ chọn tất cả" : "Chọn tất cả"}
+          {selectedItems.length === cartItems.length
+            ? "Bỏ chọn tất cả"
+            : "Chọn tất cả"}
         </button>
       </div>
 
@@ -128,18 +192,7 @@ const Cart = () => {
                   </td>
                   <td className="py-4 px-6">
                     <button
-                      onClick={() => {
-                        const updatedCart = cartItems.filter(
-                          (p) => p.id !== item.id
-                        );
-                        setCartItems(updatedCart);
-                        localStorage.setItem("cart", JSON.stringify(updatedCart));
-
-                        // Nếu sản phẩm bị xóa mà đang được chọn thì cập nhật lại selectedItems
-                        if (selectedItems.includes(item.id)) {
-                          setSelectedItems(selectedItems.filter(id => id !== item.id));
-                        }
-                      }}
+                      onClick={() => handleRemoveItem(item.id)}
                       className="bg-red-500 hover:bg-pink-600 text-white p-2 rounded-sm"
                     >
                       X
@@ -158,7 +211,6 @@ const Cart = () => {
         </table>
       </div>
 
-      {/* Tổng giá tiền và nút thanh toán */}
       <div className="mt-8 flex flex-col md:flex-row justify-between items-center">
         <h3 className="text-2xl font-bold">
           Tổng cộng:{" "}
