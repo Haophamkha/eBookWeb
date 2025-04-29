@@ -7,16 +7,18 @@ export const Truyen = ({ bookId }) => {
   const [chapterNumber, setChapterNumber] = useState(1);
   const [chapters, setChapters] = useState([]);
   const [content, setContent] = useState("");
+  const [bookName, setBookName] = useState(""); 
+  const [author, setAuthor] = useState(""); 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [commentText, setCommentText] = useState(""); 
   const [comments, setComments] = useState([]); 
-  const [displayedCommentsCount, setDisplayedCommentsCount] = useState(3); // Số bình luận hiển thị ban đầu
+  const [displayedCommentsCount, setDisplayedCommentsCount] = useState(3);
 
   const { userName, img, isLoggedIn } = useUserStore();
 
-  // Fetch chapters for the book
+  // Fetch chapters and book details
   const fetchChapters = async () => {
     setLoading(true);
     setError("");
@@ -28,6 +30,9 @@ export const Truyen = ({ bookId }) => {
       if (!bookData) {
         throw new Error("Không tìm thấy thông tin sách");
       }
+
+      setBookName(bookData.name || "Không rõ tên truyện");
+      setAuthor(bookData.author || "Không rõ tác giả");
 
       console.log("Bắt đầu tải chương cho bookId:", bookId);
 
@@ -114,7 +119,6 @@ export const Truyen = ({ bookId }) => {
         const allComments = await getComments(bookId);
         setComments(allComments);
         setCommentText("");
-        // Tăng displayedCommentsCount nếu bình luận mới không hiển thị
         if (allComments.length > displayedCommentsCount) {
           setDisplayedCommentsCount(displayedCommentsCount + 1);
         }
@@ -143,10 +147,10 @@ export const Truyen = ({ bookId }) => {
 
   // Handle show more comments
   const handleShowMoreComments = () => {
-    setDisplayedCommentsCount((prev) => prev + 3); // Hiển thị thêm 3 bình luận
+    setDisplayedCommentsCount((prev) => prev + 3);
   };
 
-  // Fetch comments when component loads
+  // Fetch chapters and comments when component loads
   useEffect(() => {
     if (bookId) {
       fetchChapters();
@@ -176,7 +180,6 @@ export const Truyen = ({ bookId }) => {
             <IoIosArrowBack className="w-6 h-6" />
           </button>
 
-          {/* Dropdown for selecting chapter */}
           <div className="relative w-1/2 max-w-md">
             <button
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -224,9 +227,13 @@ export const Truyen = ({ bookId }) => {
         <p className="text-center text-lg text-red-500 mt-6">{error}</p>
       )}
 
-      {/* Chapter Content */}
+      {/* Book Info and Chapter Content */}
       {content && (
         <div className="max-w-6xl mx-auto px-4 pt-6">
+          <div className="text-center mb-4">
+            <h1 className="text-3xl font-bold text-black">{bookName}</h1>
+            <p className="text-lg text-gray-600 italic">Tác giả: {author}</p>
+          </div>
           <h2 className="text-2xl font-semibold text-black mb-4 text-center">
             Chương {chapterNumber} -{" "}
             {chapters.find((ch) => ch.number === chapterNumber)?.title}
@@ -255,7 +262,6 @@ export const Truyen = ({ bookId }) => {
         <div className="max-w-4xl mx-auto px-4 pb-12">
           <h3 className="text-xl font-semibold text-black mb-4">Bình luận</h3>
 
-          {/* Comment Input */}
           <div className="flex items-center gap-3 mb-6">
             <img
               src={isLoggedIn ? img || "https://via.placeholder.com/40" : "https://via.placeholder.com/40"}
@@ -281,7 +287,6 @@ export const Truyen = ({ bookId }) => {
             </div>
           </div>
 
-          {/* Display Comments */}
           <div className="space-y-4">
             {comments.length > 0 ? (
               <>
@@ -318,7 +323,7 @@ export const Truyen = ({ bookId }) => {
                   <div className="text-center mt-4">
                     <button
                       onClick={handleShowMoreComments}
-                      className="bg-black text-white px-6 py-4 rounded-md  transition-all duration-300 cursor-pointer"
+                      className="bg-black text-white px-6 py-4 rounded-md transition-all duration-300 cursor-pointer"
                     >
                       Hiển thị thêm
                     </button>

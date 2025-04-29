@@ -23,15 +23,23 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const publicRoutes = ["/", "/login", "/register", "/shop"];
+  const publicRoutes = ["/", "/login", "/register", "/shop", "/shop/:id"];
 
-  // Redirect if not logged in and not on public route
-  useEffect(() => {
-    if (!isLoggedIn && !publicRoutes.includes(location.pathname)) {
-      console.log("User not logged in, redirecting to /login from", location.pathname);
-      navigate("/login");
+useEffect(() => {
+  const isPublicRoute = publicRoutes.some((route) => {
+    if (route.includes(":")) {
+      // Kiểm tra route động (ví dụ: /shop/:id)
+      const dynamicRouteRegex = new RegExp(`^${route.replace(":id", "\\d+")}$`);
+      return dynamicRouteRegex.test(location.pathname);
     }
-  }, [isLoggedIn, location.pathname, navigate]);
+    return route === location.pathname;
+  });
+
+  if (!isLoggedIn && !isPublicRoute) {
+    console.log("User not logged in, redirecting to /login from", location.pathname);
+    navigate("/login");
+  }
+}, [isLoggedIn, location.pathname, navigate]);
 
   // Update myBookCount and cartCount
   useEffect(() => {
