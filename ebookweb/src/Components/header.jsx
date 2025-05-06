@@ -23,7 +23,7 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const publicRoutes = ["/", "/login", "/register", "/shop", "/shop/:id"];
+  const publicRoutes = ["/", "/login", "/register", "/shop", "/shop/:id", "/aboutus", "/contact"];
 
 useEffect(() => {
   const isPublicRoute = publicRoutes.some((route) => {
