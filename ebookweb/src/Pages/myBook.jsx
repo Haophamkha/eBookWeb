@@ -26,9 +26,7 @@ const MyBook = () => {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
         {myBooks.length > 0 ? (
           myBooks.map((item, index) => (
-            <Link
-              to={`/shop/${item.id}`}
-              state={{ book: item }}
+            <Link to={`/bookdetails/${item.id}`} state={{ book: item }}
               key={index}
               className="h-90 group-hover:h-100 bg-white shadow border rounded-xl overflow-hidden transition-all transform hover:scale-105 group relative"
             >
@@ -47,8 +45,6 @@ const MyBook = () => {
                   </div>
                 </div>
               </div>
-
-              {/* Đổi nút thành "Đọc sách" */}
               <button className="absolute bottom-3 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 bg-indigo-500 hover:bg-indigo-600 text-white px-2 py-1 text-sm rounded shadow transition-all duration-300 w-[80%] flex items-center justify-center gap-2">
                 <BookOpen size={16} />
                 <p>Đọc sách</p>

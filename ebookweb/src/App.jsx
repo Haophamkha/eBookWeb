@@ -12,7 +12,8 @@ import Cart from "./pages/cart";
 import ContactUs from "./Pages/contactUs";
 import Login from "./Pages/login";
 import Register from "./Pages/registration";
-import MyBook from "./pages/myBook";
+import MyBook from "./Pages/myBook";
+import BookDetails from  "./Pages/bookDetails";
 import {TestGoiAPI} from "./testGoiAPI"; 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/mybook" element={<MyBook />} />
+        <Route path="/bookdetails/:id" element={<BookDetails />} />
         <Route path="/test" element={<TestGoiAPI />} />
       </Route>
       <Route path="/error" element={<ErrorPage />} />

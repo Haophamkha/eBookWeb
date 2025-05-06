@@ -22,7 +22,7 @@ const ShopDetail = () => {
         console.error("Failed to fetch books:", error);
       }
     };
-    // if (book) fetchBooks();
+    if (book) {fetchBooks();}
   }, [book]);
 
   if (!book) {
