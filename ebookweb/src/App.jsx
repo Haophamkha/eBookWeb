@@ -7,7 +7,7 @@ import MyProfile from "./Pages/myProfile";
 import ErrorPage from "./Pages/errorPage";
 import Shop from "./Pages/shop";
 import ShopDetail from "./Pages/shopDetail";
-import Cart from "./pages/Cart";
+import Cart from "./Pages/Cart";
 import ContactUs from "./Pages/contactUs";
 import Login from "./Pages/login";
 import Register from "./Pages/registration";
