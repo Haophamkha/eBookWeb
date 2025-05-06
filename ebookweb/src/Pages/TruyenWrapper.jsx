@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { Truyen } from './Truyen';
+import { Truyen } from './truyen';
 
 export default function TruyenWrapper() {
   const { bookId } = useParams();
