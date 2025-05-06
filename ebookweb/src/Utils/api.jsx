@@ -3,7 +3,7 @@ import axios from 'axios';
 // Cấu hình axios instance
 const api = axios.create({
   baseURL: "https://680fa31e67c5abddd1961651.mockapi.io",
-  timeout: 5000,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
   },
@@ -11,7 +11,7 @@ const api = axios.create({
 
 const api1 = axios.create({
   baseURL: "https://67fe36003da09811b17817be.mockapi.io/api/v1",
-  timeout: 5000,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
   },
@@ -178,7 +178,7 @@ export const getChapter = (bookId, chapterNumber) => getChapterContent(bookId, c
 
 const api2 = axios.create({
   baseURL: "https://6811254d3ac96f7119a3bbf0.mockapi.io",
-  timeout: 5000,
+  timeout: 10000,
   headers: {
     "Content-Type": "application/json",
   },
