@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import FeatureCard from '../Components/FeatureCard';
 import { FaBook, FaAward, FaStore, FaCheck } from 'react-icons/fa';
 import { BackgroundHeader } from '../Components/backgroundHeader';
-import { NavLink } from 'react-router-dom';
 import {CustomButton} from "../Components/UIElements"
 const AboutUs = () => {
   const [experience, setExperience] = useState(0);
