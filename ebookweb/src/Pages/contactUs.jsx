@@ -15,7 +15,7 @@ const ContactUs = () => {
         !recaptchaRef.current.hasAttribute("data-rendered")
       ) {
         window.grecaptcha.render(recaptchaRef.current, {
-          sitekey: "6LfLWCcrAAAAAO92Ys0Ei86oKsdZaD1VZsA_4edV",
+          sitekey: "6LcLojArAAAAALS4i-ks1iRPJPM3cdJDIMJOwu-O",
           callback: (response) => console.log("reCAPTCHA verified:", response), 
         });
         recaptchaRef.current.setAttribute("data-rendered", "true");
