@@ -118,12 +118,20 @@ const ShopDetail = () => {
             ))}
           </div>
           <div className="flex items-center justify-between mt-4">
-            <p className="text-2xl font-semibold text-orange-600">
+            <div className="flex inline-flex ">
+            <p className="text-2xl font-semibold text-orange-600 pr-5">
+              {new Intl.NumberFormat("vi-VN", {
+                style: "currency",
+                currency: "VND",
+              }).format(book.sale)}
+            </p>
+            <p className="text-base text-gray-500 line-through mr-4 mt-1.5">
               {new Intl.NumberFormat("vi-VN", {
                 style: "currency",
                 currency: "VND",
               }).format(book.price)}
             </p>
+            </div>
             <div className="flex gap-2">
               {bookStatus.isPurchased ? (
                 <>
